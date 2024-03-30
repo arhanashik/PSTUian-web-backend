@@ -18,6 +18,26 @@ class AccountOptionController extends BaseController
     {
     }
 
+
+    /**
+     * @OA\POST(
+     *     path="/api/v1/backend/AccountOptions",
+     *     tags={"Backend-Options"},
+     *     summary="Create Account-Option",
+     *     description="You can send a donation to the following accounts.",
+     *     security={{"bearer":{}}},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"donation_option"},
+     *             @OA\Property(property="donation_option", type="string", example="Bikash-01403487219", description="Name of the Donor"),
+     *        ),
+     *    ),
+     *    @OA\Response(response=201,description="Option created successfully"),
+     *    @OA\Response(response=400, description="Bad request"),
+     *    @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
     public function store(AccountOptionRequest $request): JsonResponse
     {
         try {
