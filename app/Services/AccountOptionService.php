@@ -26,4 +26,19 @@ class AccountOptionService
         return $this->accountOptionRepository->create($data);
     }
 
+
+
+    /**
+     * Retrieve all account options.
+     *
+     * @return array Array of AccountOption instances.
+     */
+    public function getAccountOptions(): array
+    {
+        // Delegate to the repository to fetch all account options
+        return $this->accountOptionRepository->all();
+    }
+
+    
+
 }
