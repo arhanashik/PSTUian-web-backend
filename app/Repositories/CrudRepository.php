@@ -13,6 +13,26 @@ class CrudRepository
      */
     public const PER_PAGE = 20;
 
+    public function all($filters = []): array
+    {
+        if (empty($filters)) {
+            return $this->model::all()->toArray();
+        }
+
+        return $this->model::where($filters)->get()->toArray();
+    }
+
+    public function paginate(?int $perPage = null, $filters = []): array
+    {
+        $perPage = $perPage ?? self::PER_PAGE;
+
+        if (empty($filters)) {
+            return $this->model::paginate($perPage)->toArray();
+        }
+
+        return $this->model::where($filters)->paginate($perPage)->toArray();
+    }
+
     /**
      * Modal class name.
      *
@@ -47,21 +67,5 @@ class CrudRepository
     public function findByColumn(string $column, string $value): ?object
     {
         return $this->model::where($column, $value)->first();
-    }
-
-    public function all(): array
-    {
-        return $this->model::all()->toArray();
-    }
-
-    public function paginate(?int $perPage = null, $filters = []): array
-    {
-        $perPage = $perPage ?? self::PER_PAGE;
-
-        if (empty($filters)) {
-            return $this->model::paginate($perPage)->toArray();
-        }
-
-        return $this->model::where($filters)->paginate($perPage)->toArray();
     }
 }
