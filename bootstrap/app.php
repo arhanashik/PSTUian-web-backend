@@ -12,9 +12,14 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
         then: function ($router) {
             Route::middleware('api')
-                ->prefix('api/v1')
-                ->name('api.')
-                ->group(base_path('routes/api/v1.php'));
+                ->prefix('api/v1/frontend')
+                ->name('api.frontend.')
+                ->group(base_path('routes/api/v1/frontend.php'));
+
+            Route::middleware('api')
+                ->prefix('api/v1/backend')
+                ->name('api.backend.')
+                ->group(base_path('routes/api/v1/backend.php'));
         }
     )
     ->withMiddleware(function (Middleware $middleware) {
