@@ -27,3 +27,12 @@ The next thing you can do to help us is by opening your heart. A small <a href="
 + Run project : `php artisan serve`
 
 </details>
+
+<details>
+<summary><b>Database Seeding</b></summary>
+
+```sh
+php artisan migrate:fresh --seed
+```
+
+</details>
