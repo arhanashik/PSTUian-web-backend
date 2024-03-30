@@ -1,4 +1,3 @@
-
 <p align="center"> 
 <img src="https://pstuian.com/images/pstuian_featured_photo.png"  />
 </p>
@@ -13,22 +12,23 @@ The next thing you can do to help us is by opening your heart. A small <a href="
 
 <br><br>
 
-<details>
+<details open>
 <summary><b>Installation Guideline</b></summary>
 
-+ Open Git Bash & run : `git clone https://github.com/arhanashik/PSTUian-web-backend.git` to clone repo
-+ Open project in vs code & run : `composer install` or `composer update`
-    + If you find error to install compser, for your running php version, then run : `composer install --ignore-platform-reqs` or  Uninstall xampp and again install require xampp( php ) version.
-+ Install NPM Dependencies : `npm install`
-+ Create a copy of your .env file: `cp .env.example .env`
-+ Generate an app key : `php artisan key:generate`
-+ Open phpMyAdmin to create a database and also insert database name into .env file
-+ Migrate the database : `php artisan migrate`
-+ Run project : `php artisan serve`
+-   Open Git Bash & run : `git clone https://github.com/arhanashik/PSTUian-web-backend.git` to clone repo
+-   Open project in vs code & run : `composer install` or `composer update`
+    -   If you find error to install compser, for your running php version, then run : `composer install --ignore-platform-reqs` or Uninstall xampp and again install require xampp( php ) version.
+-   Install NPM Dependencies : `npm install`
+-   Create a copy of your .env file: `cp .env.example .env`
+-   Generate an app key : `php artisan key:generate`
+-   Open phpMyAdmin to create a database and also insert database name into .env file
+-   Migrate the database : `php artisan migrate`
+-   Run project : `php artisan serve`
+-   Swagger API Documentation will be at http://localhost:8000/api/documentation#/
 
 </details>
 
-<details>
+<details open>
 <summary><b>Database Seeding</b></summary>
 
 ```sh

@@ -17,6 +17,19 @@ class DonationsController extends BaseController
     {
     }
 
+    /**
+     * @OA\GET(
+     *     path="/api/v1/frontend/donations",
+     *     tags={"Frontend-Donations"},
+     *     summary="Get Donation List as Array",
+     *     description="Get Donation List as Array",
+     *     operationId="index",
+     *     security={{"bearer":{}}},
+     *     @OA\Response(response=200,description="Get Donation List as Array"),
+     *     @OA\Response(response=400, description="Bad request"),
+     *     @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
     public function index(): JsonResponse
     {
         try {
