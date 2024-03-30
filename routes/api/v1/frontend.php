@@ -10,6 +10,4 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::get('/ping', [PingPongController::class, 'index']);
-
-// Donations
-Route::get('/donations', [DonationsController::class, 'index']);
+Route::apiResource('donations', DonationsController::class)->only(['index', 'store']);
