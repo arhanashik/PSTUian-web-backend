@@ -20,9 +20,16 @@ class AccountOptionController extends BaseController
     }
 
     /**
-     * Retrieve all account options and return them as a JSON response.
-     *
-     * @return JsonResponse A JSON response containing the retrieved account options.
+     * @OA\GET(
+     *     path="/api/v1/backend/AccountOptions",
+     *     tags={"Backend-AccountOptions"},
+     *     summary="Get AccountOptions List as Array",
+     *     description="Get AccountOptions List as Array",
+     *     security={{"bearer":{}}},
+     *     @OA\Response(response=200,description="Get AccountOptions List as Array"),
+     *     @OA\Response(response=400, description="Bad request"),
+     *     @OA\Response(response=404, description="Resource Not Found"),
+     * )
      */
     public function index(): JsonResponse
     {
