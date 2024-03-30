@@ -25,6 +25,9 @@ The next thing you can do to help us is by opening your heart. A small <a href="
 -   Migrate the database : `php artisan migrate`
 -   Run project : `php artisan serve`
 -   Swagger API Documentation will be at http://localhost:8000/api/documentation#/
+-   Demo of Swagger documentation -
+![Demo Swagger](https://i.ibb.co/rky1frq/Screenshot-2024-03-30-at-8-56-43-PM.png "Demo of Swagger documentation")
+
 
 </details>
 

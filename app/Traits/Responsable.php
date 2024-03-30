@@ -9,7 +9,16 @@ use Illuminate\Http\JsonResponse;
 
 trait Responsable
 {
-    public function responseJson(array $data, int $status = 200, $message = null): JsonResponse
+    /**
+     * Response Json.
+     *
+     * @param array|object|mixed $data
+     * @param integer $status
+     * @param [type] $message
+     *
+     * @return JsonResponse
+     */
+    public function responseJson($data, int $status = 200, $message = null): JsonResponse
     {
         return response()->json(
             [
