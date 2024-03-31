@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class AccountsOption extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'donation_option',
-        'deleted'
     ];
 }

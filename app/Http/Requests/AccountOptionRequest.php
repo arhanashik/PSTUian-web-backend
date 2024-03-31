@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
-
 class AccountOptionRequest extends FormRequest
 {
     /**
@@ -22,7 +20,7 @@ class AccountOptionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'donation_option	' => ['string', 'max:150'],
+            'donation_option' => ['string', 'max:150'],
         ];
     }
 }

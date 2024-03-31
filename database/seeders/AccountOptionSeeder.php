@@ -11,9 +11,7 @@ class AccountOptionSeeder extends Seeder
     public function __construct(private readonly AccountOptionService $accountOptionService)
     {
     }
-    /**
-     * Run the database seeds.
-     */
+    
     public function run(): void
     {
         $this->accountOptionService->createAccountOption([

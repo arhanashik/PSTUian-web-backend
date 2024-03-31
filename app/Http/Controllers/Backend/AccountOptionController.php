@@ -17,11 +17,12 @@ class AccountOptionController extends BaseController
 {
     public function __construct(private readonly AccountOptionService $accountOptionService)
     {
+        
     }
 
     /**
      * @OA\GET(
-     *     path="/api/v1/backend/AccountOptions",
+     *     path="/api/v1/backend/account-options",
      *     tags={"Backend-AccountOptions"},
      *     summary="Get AccountOptions List as Array",
      *     description="Get AccountOptions List as Array",
@@ -34,25 +35,19 @@ class AccountOptionController extends BaseController
     public function index(): JsonResponse
     {
         try {
-            // Retrieve all account options
             $options = $this->accountOptionService->getAccountOptions();
 
-            // Generate a message indicating the total number of options found
             $message = 'Total ' . count($options) . ' ' . Str::plural('options', count($options)) . ' found.';
 
-            // Return a JSON response with the retrieved account options and a success message
             return $this->responseJson($options, Response::HTTP_OK, $message);
         } catch (Exception $exception) {
-            // Handle any exceptions and return an error response
             return $this->responseErrorJson($exception);
         }
     }
 
-
-
     /**
      * @OA\POST(
-     *     path="/api/v1/backend/AccountOptions",
+     *     path="/api/v1/backend/account-options",
      *     tags={"Backend-AccountOptions"},
      *     summary="Create Account-Option",
      *     description="You can send a donation to the following accounts.",
