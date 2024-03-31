@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             DonationsSeeder::class,
+            AccountOptionSeeder::class
         ]);
     }
 }

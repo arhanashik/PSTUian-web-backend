@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Requests;
 
-class DonationRequest extends FormRequest
+class AccountOptionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,10 +22,7 @@ class DonationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['nullable', 'string', 'max:100'],
-            'info' => ['nullable', 'string', 'max:500'],
-            'email' => ['nullable', 'string', 'email', 'max:150'],
-            'reference' => ['required', 'string', 'max:150'],
+            'donation_option' => ['required', 'string', 'max:150'],
         ];
     }
 }
