@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
-
 class FacultyRequest extends FormRequest
 {
     /**
@@ -29,15 +27,15 @@ class FacultyRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'short_title.required' => 'The short title field is required.',
-            'short_title.string' => 'The short title must be a string.',
-            'short_title.max' => 'The short title may not be greater than :max characters.',
-            'short_title.alpha' => 'The short title may only contain alphabetic characters.',
+            'short_title.required' => 'Short title field is required.',
+            'short_title.string' => 'Short title must be a string.',
+            'short_title.max' => 'Short title may not be greater than :max characters.',
+            'short_title.alpha' => 'Short title may only contain alphabetic characters.',
 
-            'title.required' => 'The title field is required.',
-            'title.string' => 'The title must be a string.',
-            'title.max' => 'The title may not be greater than :max characters.',
-            'title.alpha' => 'The title may only contain alphabetic characters.',           
+            'title.required' => 'Title field is required.',
+            'title.string' => 'Title must be a string.',
+            'title.max' => 'Title may not be greater than :max characters.',
+            'title.alpha' => 'Title may only contain alphabetic characters.',           
         ];
     }
 }
