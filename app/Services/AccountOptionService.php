@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-use App\Models\Frontend\AccountsOption;
+use App\Models\AccountsOption;
 use App\Repositories\AccountOptionRepository;
 
 class AccountOptionService
@@ -14,7 +14,6 @@ class AccountOptionService
     public function __construct(
         private readonly AccountOptionRepository $accountOptionRepository
     ) {
-
     }
 
     public function createAccountOption(array $data): AccountsOption
@@ -26,5 +25,4 @@ class AccountOptionService
     {
         return $this->accountOptionRepository->all();
     }
-
 }
