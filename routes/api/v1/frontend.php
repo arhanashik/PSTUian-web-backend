@@ -12,4 +12,4 @@ Route::get('/user', function (Request $request) {
 
 Route::get('/ping', [PingPongController::class, 'index']);
 Route::apiResource('donations', DonationsController::class)->only(['index', 'store']);
-Route::apiResource('accountoptions', AccountOptionController::class)->only(['index']);
+Route::apiResource('account-options', AccountOptionController::class)->only(['index']);
