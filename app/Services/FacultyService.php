@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services;
 
+use App\Models\Faculty;
 use App\Repositories\FacultyRepository;
 
 class FacultyService{
@@ -12,8 +13,14 @@ class FacultyService{
 
     private readonly FacultyRepository $facultyRepository;
     
-    public function __construct(FacultyRepository $facultyRepositoryInstance) {
+    public function __construct(FacultyRepository $facultyRepositoryInstance)
+    {
         $this->facultyRepository = $facultyRepositoryInstance;
     } 
+    
+    public function storeFaculty(array $data): Faculty
+    {
+        return $this->facultyRepository->create($data);
+    }
     
 }

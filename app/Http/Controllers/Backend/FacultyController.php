@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\BaseController;
-use App\Services\FacultyService;
-use Symfony\Component\HttpFoundation\Response;
 use Exception;
+use App\Http\Controllers\BaseController;
+use App\Http\Requests\FacultyRequest;
+use App\Services\FacultyService;
+use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class FacultyController extends BaseController
 {
@@ -16,6 +18,19 @@ class FacultyController extends BaseController
     public function __construct(FacultyService $facultyServiceInstace)
     {
         $this->facultyService = $facultyServiceInstace;
+    }
+    
+    public function store(FacultyRequest $facultyRequest): JsonResponse
+    {
+        try {
+            return $this->responseJson(
+                $this->facultyService->storeFaculty($facultyRequest->all()),
+                Response::HTTP_CREATED,
+                __('Faculty saved successfully.')
+            );
+        } catch (Exception $exception) {
+            return $this->responseErrorJson($exception);
+        }
     }
 
 }
