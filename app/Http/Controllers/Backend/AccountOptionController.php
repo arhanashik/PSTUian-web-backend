@@ -1,15 +1,14 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
 use Exception;
 use Illuminate\Support\Str;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\AccountOptionRequest;
 use App\Services\AccountOptionService;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -17,7 +16,6 @@ class AccountOptionController extends BaseController
 {
     public function __construct(private readonly AccountOptionService $accountOptionService)
     {
-        
     }
 
     /**
@@ -36,7 +34,6 @@ class AccountOptionController extends BaseController
     {
         try {
             $options = $this->accountOptionService->getAccountOptions();
-
             $message = 'Total ' . count($options) . ' ' . Str::plural('options', count($options)) . ' found.';
 
             return $this->responseJson($options, Response::HTTP_OK, $message);
