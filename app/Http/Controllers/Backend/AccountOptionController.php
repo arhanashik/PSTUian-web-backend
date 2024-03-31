@@ -53,7 +53,7 @@ class AccountOptionController extends BaseController
     /**
      * @OA\POST(
      *     path="/api/v1/backend/AccountOptions",
-     *     tags={"Backend-Options"},
+     *     tags={"Backend-Backend-AccountOptions"},
      *     summary="Create Account-Option",
      *     description="You can send a donation to the following accounts.",
      *     security={{"bearer":{}}},
