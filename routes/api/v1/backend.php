@@ -8,4 +8,4 @@ use Illuminate\Support\Facades\Route;
 Route::apiResource('donations', DonationsController::class)->only(['index', 'update', 'destroy']);
 
 // AccountOption (Bikash, Nagod, Rocket)
-Route::apiResource('account-option', AccountOptionController::class)->only(['index', 'store', 'update', 'destroy']);
+Route::apiResource('account-options', AccountOptionController::class)->only(['index', 'store', 'update', 'destroy']);
