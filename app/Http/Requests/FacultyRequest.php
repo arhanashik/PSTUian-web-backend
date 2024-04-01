@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
+
 class FacultyRequest extends FormRequest
 {
     /**
@@ -21,6 +23,8 @@ class FacultyRequest extends FormRequest
      */
     public function rules(): array
     {
+        $facultyId = $this->route('faculty');
+
         $rules = [
             'short_title' => [
                 'required',
@@ -37,8 +41,8 @@ class FacultyRequest extends FormRequest
         ];
     
         if ($this->isMethod('PUT') || $this->isMethod('PATCH')) {
-            $rules['short_title'][] = 'unique:faculties,short_title,' . $this->id;
-            $rules['title'][] = 'unique:faculties,title,' . $this->id;
+            $rules['short_title'][] = Rule::unique('faculties')->ignore($facultyId);
+            $rules['title'][] = Rule::unique('faculties')->ignore($facultyId);
         } else {
             $rules['short_title'][] = 'unique:faculties,short_title';
             $rules['title'][] = 'unique:faculties,title';
