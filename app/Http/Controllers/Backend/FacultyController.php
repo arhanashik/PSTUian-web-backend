@@ -50,4 +50,18 @@ class FacultyController extends BaseController
             return $this->responseErrorJson($exception);
         }
     }
+    
+    public function update(FacultyRequest $facultyRequest, $id): JsonResponse
+    {
+        try {
+            return $this->responseJson(
+                $this->facultyService->updateFaculty($id, $facultyRequest->all()),
+                Response::HTTP_OK,
+                __('Faculty updated successfully.')
+            );
+        } catch (Exception $exception) {
+            return $this->responseErrorJson($exception);
+        }
+    }
+    
 }
