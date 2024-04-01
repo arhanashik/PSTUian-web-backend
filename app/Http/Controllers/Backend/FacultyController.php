@@ -38,6 +38,7 @@ class FacultyController extends BaseController
      *    @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
+    
     public function store(FacultyRequest $facultyRequest): JsonResponse
     {
         try {
@@ -51,6 +52,26 @@ class FacultyController extends BaseController
         }
     }
     
+    /**
+     * @OA\PUT(
+     *     path="/api/v1/backend/faculties/1",
+     *     tags={"Faculties"},
+     *     summary="Admin update Faculty",
+     *     description="Implement an API endpoint for administrators to effortlessly update faculty.",
+     *     security={{"bearer":{}}},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"short_title", "title"},
+     *             @OA\Property(property="short_title", type="string", example="CSE", description="Name of the faculty"),
+     *             @OA\Property(property="title", type="string", example="Computer Science And Engineering", description="Name of the faculty"),
+     *        ),
+     *    ),
+     *    @OA\Response(response=201,description="faculty updated successfully"),
+     *    @OA\Response(response=400, description="Bad request"),
+     *    @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
     public function update(FacultyRequest $facultyRequest, $id): JsonResponse
     {
         try {
