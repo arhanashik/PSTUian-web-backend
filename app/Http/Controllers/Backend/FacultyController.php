@@ -113,6 +113,19 @@ class FacultyController extends BaseController
         }
     }
 
+    /**
+     * @OA\GET(
+     *     path="/api/v1/frontend/faculties/{id}",
+     *     tags={"Faculties"},
+     *     summary="Show faculty by id",
+     *     description="",
+     *     @OA\Parameter(name="id", description="id, eg; 1", required=true, in="path", @OA\Schema(type="integer")),
+     *     security={{"bearer":{}}},
+     *    @OA\Response(response=201,description="faculty updated successfully"),
+     *    @OA\Response(response=400, description="Bad request"),
+     *    @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
     public function showFacultyById(int $id): JsonResponse
     {
         try {
