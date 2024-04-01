@@ -10,7 +10,7 @@ class BatchRepository extends CrudRepository
 
     public function deleteBatch($batch): Batch
     {
-        $batch->delete();
+        $batch->update(['deleted' => 1]);
         return $batch;
     }
 }

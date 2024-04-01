@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('title')->nullable();
             $table->string('session', 20);
             $table->unsignedInteger('total_student');
-            $table->unsignedTinyInteger('deleted');
+            $table->unsignedTinyInteger('deleted')->default(0);
             $table->timestamps();
         });
     }
