@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Requests;
 
-class FacultyRequest extends FormRequest
+class FacultyUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

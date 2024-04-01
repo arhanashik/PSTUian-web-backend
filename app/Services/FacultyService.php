@@ -16,13 +16,23 @@ class FacultyService
         private readonly FacultyRepository $facultyRepository
     ) {
     }
-    
+
+    public function getFaculties(): array
+    {
+        return $this->facultyRepository->all();
+    }
+
+    public function getPaginatedFaculties(?int $perPage = null, $filters = []): array
+    {
+        return $this->facultyRepository->paginate($perPage, $filters);
+    }
+
     public function storeFaculty(array $data): Faculty
     {
         return $this->facultyRepository->create($data);
     }
 
-    public function updateFaculty(int $id, array $data): void
+    public function updateFaculty(int $id, array $data): Faculty
     {
         $faculty = $this->facultyRepository->find($id);
 
@@ -30,6 +40,6 @@ class FacultyService
             throw new NotFoundHttpException(__(self::NOT_FOUND_MESSAGE));
         }
 
-        $this->facultyRepository->update($faculty, $data);
+        return $this->facultyRepository->update($faculty, $data);
     }
 }
