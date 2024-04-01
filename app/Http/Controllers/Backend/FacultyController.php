@@ -77,7 +77,6 @@ class FacultyController extends BaseController
         }
     }
 
-
     /**
      * @OA\POST(
      *     path="/api/v1/backend/faculties/{id}",
