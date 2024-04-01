@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services;
 
+use App\Helper\Constant;
 use App\Models\Batch;
 use App\Repositories\BatchRepository;
 
@@ -23,7 +24,7 @@ class BatchService
 
     public function getPaginatedBatches(?int $perPage = null, $filters = []): array
     {
-        $filters['deleted'] = 0;
+        $filters['deleted'] = Constant::NOT_DELETED;
         return $this->batchRepository->paginate($perPage, $filters);
     }
 
