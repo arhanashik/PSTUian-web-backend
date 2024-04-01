@@ -21,7 +21,7 @@ class BatchController extends BaseController
     /**
      * @OA\GET(
      *     path="/api/v1/backend/batches",
-     *     tags={"Batches"},
+     *     tags={"Backend-Batches"},
      *     summary="Get Batch List as Array",
      *     description="Get Batch List as Array",
      *     security={{"bearer":{}}},
@@ -46,7 +46,7 @@ class BatchController extends BaseController
     /**
      * @OA\GET(
      *     path="/api/v1/backend/batches/{id}",
-     *     tags={"Batches"},
+     *     tags={"Backend-Batches"},
      *     summary="Get a Batch",
      *     description="Get a Batch",
      *     @OA\Parameter(name="id", description="id, eg; 1", required=true, in="path", @OA\Schema(type="integer")),
@@ -69,7 +69,7 @@ class BatchController extends BaseController
     /**
      * @OA\POST(
      *     path="/api/v1/backend/batches",
-     *     tags={"Batches"},
+     *     tags={"Backend-Batches"},
      *     summary="Insert new batch",
      *     description="Implement an API endpoint for administrators to effortlessly add new batch entries.",
      *     security={{"bearer":{}}},
@@ -105,7 +105,7 @@ class BatchController extends BaseController
     /**
      * @OA\PUT(
      *     path="/api/v1/backend/batches/{id}",
-     *     tags={"Batches"},
+     *     tags={"Backend-Batches"},
      *     summary="Update batch",
      *     description="Update batch by ID",
      *     @OA\Parameter(name="id", description="id, eg; 1", required=true, in="path", @OA\Schema(type="integer")),
@@ -139,12 +139,11 @@ class BatchController extends BaseController
             return $this->responseErrorJson($exception);
         }
     }
-
     /**
      * @OA\Delete(
      *      path="/api/v1/backend/batches/{id}",
+     *      tags={"Backend-Batches"},
      *      summary="Delete a batch",
-     *      tags={"Batches"},
      *      description="Delete a batch by its ID",
      *      @OA\Parameter(
      *          name="id",
@@ -190,4 +189,5 @@ class BatchController extends BaseController
             return $this->responseErrorJson($exception);
         }
     }
+
 }
