@@ -6,8 +6,7 @@ namespace App\Repositories;
 
 use App\Models\Faculty;
 
-class FacultyRepository extends CrudRepository{
-
+class FacultyRepository extends CrudRepository
+{
     protected string $model = Faculty::class;
-    
 }

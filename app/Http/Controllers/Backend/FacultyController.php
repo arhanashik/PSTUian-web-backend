@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Backend;
 
+use App\Models\Faculty;
 use Exception;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\FacultyRequest;
@@ -13,13 +14,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 class FacultyController extends BaseController
 {
-    private readonly FacultyService $facultyService;
-
-    public function __construct(FacultyService $facultyServiceInstace)
+    public function __construct(private readonly FacultyService $facultyService) 
     {
-        $this->facultyService = $facultyServiceInstace;
     }
-    
+
     /**
      * @OA\POST(
      *     path="/api/v1/backend/faculties",
@@ -30,9 +28,9 @@ class FacultyController extends BaseController
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             required={"donation_option"},
+     *             required={"short_title", "title"},
      *             @OA\Property(property="short_title", type="string", example="CSE", description="Name of the faculty"),
-     *             @OA\Property(property="title", type="string", example="Computer Science & Engineering", description="Name of the faculty"),
+     *             @OA\Property(property="title", type="string", example="Computer Science And Engineering", description="Name of the faculty"),
      *        ),
      *    ),
      *    @OA\Response(response=201,description="faculty created successfully"),
@@ -52,5 +50,4 @@ class FacultyController extends BaseController
             return $this->responseErrorJson($exception);
         }
     }
-
 }

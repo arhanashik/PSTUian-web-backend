@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('faculties', function (Blueprint $table) {
             $table->id();
-            $table->string('short_title',50);
-            $table->string('title',150);
+            $table->string('short_title', 50);
+            $table->string('title', 150);
             $table->boolean('deleted')->default(false);
             $table->timestamps();
         });
