@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\FacultyController;
 use App\Http\Controllers\Frontend\AccountOptionController;
 use App\Http\Controllers\Frontend\DonationsController;
 use App\Http\Controllers\Frontend\PingPongController;
@@ -15,3 +16,7 @@ Route::apiResource('donations', DonationsController::class)->only(['index', 'sto
 
 // AccountOption (Bikash, Nagod, Rocket)
 Route::apiResource('account-options', AccountOptionController::class)->only(['index']);
+
+// Faculty
+Route::apiResource('faculties', FacultyController::class)->only(['index']);
+Route::get('/faculties/{id}', [FacultyController::class, 'showFacultyById'])->name('faculties.showFacultyById');
