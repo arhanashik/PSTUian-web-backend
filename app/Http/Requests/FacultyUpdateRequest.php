@@ -22,8 +22,20 @@ class FacultyUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'short_title' => ['required', 'string', 'max:50', 'alpha', 'unique:faculties,short_title', 'regex:/^[a-zA-Z]+$/'],
-            'title' => ['required', 'string', 'max:150', 'unique:faculties,title'],
+            'short_title' => [
+                'required',
+                'string',
+                'max:50',
+                'alpha',
+                'unique:faculties,short_title,' . $this->id,
+                'regex:/^[a-zA-Z]+$/'
+            ],
+            'title' => [
+                'required',
+                'string',
+                'max:150',
+                'unique:faculties,title,' . $this->id,
+            ],
         ];
     }
 
