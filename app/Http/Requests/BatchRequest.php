@@ -26,8 +26,6 @@ class BatchRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                'alpha',
-                'regex:/^[a-zA-Z]+$/'
             ],
             'title' => [
                 'string',
@@ -36,8 +34,6 @@ class BatchRequest extends FormRequest
                 'required',
                 'string',
                 'max:20',
-                'alpha',
-                'regex:/^[a-zA-Z]+$/'
             ],
             'total_student' => [
                 'required',

@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Helper\Constant;
 use App\Models\Batch;
 
 class BatchRepository extends CrudRepository
@@ -10,7 +11,7 @@ class BatchRepository extends CrudRepository
 
     public function deleteBatch($batch): Batch
     {
-        $batch->update(['deleted' => 1]);
+        $batch->update(['deleted' => Constant::SOFT_DELETE]);
         return $batch;
     }
 }

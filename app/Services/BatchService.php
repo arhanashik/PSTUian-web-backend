@@ -23,7 +23,13 @@ class BatchService
 
     public function getPaginatedBatches(?int $perPage = null, $filters = []): array
     {
+        $filters['deleted'] = 0;
         return $this->batchRepository->paginate($perPage, $filters);
+    }
+
+    public function getBatch(int $id)
+    {
+        return $this->batchRepository->find($id);
     }
 
     public function storeBatch(array $data): Batch

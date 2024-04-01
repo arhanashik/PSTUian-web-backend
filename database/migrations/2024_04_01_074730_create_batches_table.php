@@ -20,6 +20,11 @@ return new class extends Migration
             $table->unsignedInteger('total_student');
             $table->unsignedTinyInteger('deleted')->default(0);
             $table->timestamps();
+
+            $table->foreign('faculty_id')
+                ->references('id')
+                ->on('faculties')
+                ->onDelete('cascade');
         });
     }
 

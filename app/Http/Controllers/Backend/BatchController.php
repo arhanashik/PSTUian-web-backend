@@ -44,10 +44,33 @@ class BatchController extends BaseController
     }
 
     /**
+     * @OA\GET(
+     *     path="/api/v1/backend/batches/{id}",
+     *     tags={"Batches"},
+     *     summary="Get a Batch",
+     *     description="Get a Batch",
+     *     @OA\Parameter(name="id", description="id, eg; 1", required=true, in="path", @OA\Schema(type="integer")),
+     *     security={{"bearer":{}}},
+     *     @OA\Response(response=200,description="Get a Batch"),
+     *     @OA\Response(response=400, description="Bad request"),
+     *     @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
+    public function show(int $id): JsonResponse
+    {
+        try {
+            $batch = $this->batchService->getBatch($id);
+            return $this->responseJson($batch, Response::HTTP_OK, $batch ? __('Batch found') : __('Batch not found'));
+        } catch (Exception $exception) {
+            return $this->responseErrorJson($exception);
+        }
+    }
+
+    /**
      * @OA\POST(
      *     path="/api/v1/backend/batches",
      *     tags={"Batches"},
-     *     summary="Admin insert new batch",
+     *     summary="Insert new batch",
      *     description="Implement an API endpoint for administrators to effortlessly add new batch entries.",
      *     security={{"bearer":{}}},
      *     @OA\RequestBody(
@@ -57,7 +80,7 @@ class BatchController extends BaseController
      *             @OA\Property(property="name", type="string", example="CSE 12th Batch", description="Name of the batch"),
      *             @OA\Property(property="title", type="string", example="Baundule 12", description="Title of the batch"),
      *             @OA\Property(property="session", type="string", example="2014-15", description="Session of the batch"),
-     *             @OA\Property(property="faculty_id", type="integer", example="2", description="Faculty id of the batch"),
+     *             @OA\Property(property="faculty_id", type="integer", example="1", description="Faculty id of the batch"),
      *             @OA\Property(property="total_student", type="integer", example="67", description="Total students in the batch"),
      *        ),
      *    ),
@@ -95,7 +118,7 @@ class BatchController extends BaseController
      * *             @OA\Property(property="name", type="string", example="CSE 12th Batch", description="Name of the batch"),
      * *             @OA\Property(property="title", type="string", example="Baundule 12", description="Title of the batch"),
      * *             @OA\Property(property="session", type="string", example="2014-15", description="Session of the batch"),
-     * *             @OA\Property(property="faculty_id", type="integer", example="2", description="Faculty id of the batch"),
+     * *             @OA\Property(property="faculty_id", type="integer", example="1", description="Faculty id of the batch"),
      * *             @OA\Property(property="total_student", type="integer", example="67", description="Total students in the batch"),
      * *        ),
      *    ),
@@ -111,6 +134,57 @@ class BatchController extends BaseController
                 $this->batchService->updateBatch($id, $request->all()),
                 Response::HTTP_OK,
                 __('Batch updated successfully.')
+            );
+        } catch (Exception $exception) {
+            return $this->responseErrorJson($exception);
+        }
+    }
+
+    /**
+     * @OA\Delete(
+     *      path="/api/v1/backend/batches/{id}",
+     *      summary="Delete a batch",
+     *      tags={"Batches"},
+     *      description="Delete a batch by its ID",
+     *      @OA\Parameter(
+     *          name="id",
+     *          in="path",
+     *          required=true,
+     *          description="ID of the batch to delete",
+     *          @OA\Schema(
+     *              type="integer",
+     *              format="int64"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Batch deleted successful",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string",
+     *                  example="Batch deleted successfully."
+     *              )
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Batch not found"
+     *      ),
+     *      @OA\Response(
+     *          response=500,
+     *          description="Internal server error"
+     *      )
+     * )
+     */
+    public function destroy(int $id): JsonResponse
+    {
+        try {
+            return $this->responseJson(
+                $this->batchService->deleteBatch($id),
+                Response::HTTP_OK,
+                __('Batch delete successfully.')
             );
         } catch (Exception $exception) {
             return $this->responseErrorJson($exception);
