@@ -34,11 +34,11 @@ class FacultyController extends BaseController
     public function index(): JsonResponse
     {
         try {
-            $donations = $this->facultyService->getPaginatedFaculties();
-            $total = $donations['total'] ?? 0;
+            $faculties = $this->facultyService->getPaginatedFaculties();
+            $total = $faculties['total'] ?? 0;
             $message = 'Total ' . $total . ' ' . Str::plural('faculty', $total) . ' found.';
 
-            return $this->responseJson($donations, Response::HTTP_OK, $message);
+            return $this->responseJson($faculties, Response::HTTP_OK, $message);
         } catch (Exception $exception) {
             return $this->responseErrorJson($exception);
         }
@@ -64,11 +64,11 @@ class FacultyController extends BaseController
      *    @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function store(FacultyRequest $facultyRequest): JsonResponse
+    public function store(FacultyRequest $request): JsonResponse
     {
         try {
             return $this->responseJson(
-                $this->facultyService->storeFaculty($facultyRequest->all()),
+                $this->facultyService->storeFaculty($request->all()),
                 Response::HTTP_CREATED,
                 __('Faculty saved successfully.')
             );
@@ -78,13 +78,13 @@ class FacultyController extends BaseController
     }
 
     /**
-     * @OA\POST(
+     * @OA\PUT(
      *     path="/api/v1/backend/faculties/{id}",
      *     tags={"Faculties"},
      *     summary="Update faculty",
      *     description="Update faculty by ID",
      *     @OA\Parameter(name="id", description="id, eg; 1", required=true, in="path", @OA\Schema(type="integer")),
-     *     @OA\Parameter(name="_method", description="PUT", example="PUT", required=true, in="query", @OA\Schema(type="string")),
+     *     @OA\Parameter(name="_method", description="PUT / POST", example="PUT", required=true, in="query", @OA\Schema(type="string")),
      *     security={{"bearer":{}}},
      *     @OA\RequestBody(
      *         required=true,
@@ -95,12 +95,12 @@ class FacultyController extends BaseController
      *             @OA\Property(property="title", type="string", example="Computer Science And Engineering", description="Name of the faculty"),
      *        ),
      *    ),
-     *    @OA\Response(response=201,description="faculty created successfully"),
+     *    @OA\Response(response=201,description="faculty updated successfully"),
      *    @OA\Response(response=400, description="Bad request"),
      *    @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function update(FacultyUpdateRequest $request, int $id): JsonResponse
+    public function update(FacultyRequest $request, int $id): JsonResponse
     {
         try {
             return $this->responseJson(

@@ -21,10 +21,29 @@ class FacultyRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'short_title' => ['required', 'string', 'max:50', 'alpha', 'unique:faculties,short_title', 'regex:/^[a-zA-Z]+$/'],
-            'title' => ['required', 'string', 'max:150', 'unique:faculties,title'],
+        $rules = [
+            'short_title' => [
+                'required',
+                'string',
+                'max:50',
+                'alpha',
+                'regex:/^[a-zA-Z]+$/'
+            ],
+            'title' => [
+                'required',
+                'string',
+                'max:150',
+            ],
         ];
+    
+        if ($this->isMethod('PUT') || $this->isMethod('PATCH')) {
+            $rules['short_title'][] = 'unique:faculties,short_title,' . $this->id;
+            $rules['title'][] = 'unique:faculties,title,' . $this->id;
+        } else {
+            $rules['short_title'][] = 'unique:faculties,short_title';
+            $rules['title'][] = 'unique:faculties,title';
+        }
+        return $rules;
     }
 
     public function messages(): array
