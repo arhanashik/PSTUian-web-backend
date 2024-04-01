@@ -112,4 +112,17 @@ class FacultyController extends BaseController
             return $this->responseErrorJson($exception);
         }
     }
+
+    public function showFacultyById(int $id): JsonResponse
+    {
+        try {
+            return $this->responseJson(
+                $this->facultyService->FacultyById($id),
+                Response::HTTP_CREATED,
+                __('Faculty fetch successfully.')
+            );
+        } catch (Exception $exception) {
+            return $this->responseErrorJson($exception);
+        }
+    }
 }

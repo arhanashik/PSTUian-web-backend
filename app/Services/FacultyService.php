@@ -42,4 +42,15 @@ class FacultyService
 
         return $this->facultyRepository->update($faculty, $data);
     }
+
+    public function FacultyById(int $id): ?Faculty
+    {
+        $faculty = $this->facultyRepository->find($id);
+
+        if (!$faculty) {
+            throw new NotFoundHttpException(__(self::NOT_FOUND_MESSAGE));
+        }
+
+        return $faculty;
+    }
 }
