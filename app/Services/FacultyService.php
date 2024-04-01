@@ -7,20 +7,17 @@ namespace App\Services;
 use App\Models\Faculty;
 use App\Repositories\FacultyRepository;
 
-class FacultyService{
-
+class FacultyService
+{
     const NOT_FOUND_MESSAGE = "Faculty not found";
 
-    private readonly FacultyRepository $facultyRepository;
-    
-    public function __construct(FacultyRepository $facultyRepositoryInstance)
-    {
-        $this->facultyRepository = $facultyRepositoryInstance;
-    } 
+    public function __construct(
+        private readonly FacultyRepository $facultyRepository
+    ) {
+    }
     
     public function storeFaculty(array $data): Faculty
     {
         return $this->facultyRepository->create($data);
     }
-    
 }
