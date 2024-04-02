@@ -17,6 +17,18 @@ class CoursesController extends BaseController
     {
     }
 
+    /**
+     * @OA\GET(
+     *     path="/api/v1/backend/courses",
+     *     tags={"Courses"},
+     *     summary="Get courses list as array",
+     *     description="",
+     *     security={{"bearer":{}}},
+     *     @OA\Response(response=200,description="Get courses list as array"),
+     *     @OA\Response(response=400, description="Bad request"),
+     *     @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
     public function index(): JsonResponse
     {
        try {
