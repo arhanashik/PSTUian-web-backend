@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\AccountOptionController;
+use App\Http\Controllers\Backend\CoursesController;
 use App\Http\Controllers\Backend\DonationsController;
 use App\Http\Controllers\Backend\FacultyController;
 use Illuminate\Support\Facades\Route;
@@ -13,3 +14,6 @@ Route::apiResource('account-options', AccountOptionController::class)->only(['in
 
 // Faculty
 Route::apiResource('faculties', FacultyController::class)->only(['index', 'store', 'update', 'destroy']);
+
+// Courses
+Route::apiResource('courses', CoursesController::class)->only(['index', 'store', 'update', 'destroy']);
