@@ -114,4 +114,41 @@ class CoursesController extends BaseController
             return $this->responseErrorJson($exception);
         }
     }
+
+    /**
+     * @OA\DELETE(
+     *     path="/api/v1/backend/courses/{id}",
+     *     tags={"Courses"},
+     *     summary="Delete a course",
+     *     description="Delete a specific course by its ID",
+     *     @OA\Parameter(
+     *         name="id",
+     *         description="ID of the course",
+     *         required=true,
+     *         in="path",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     security={{"bearer":{}}},
+     *     @OA\Response(
+     *         response=204,
+     *         description="Course deleted successfully"
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Course not found"
+     *     )
+     * )
+     */
+    public function destroy(int $id): JsonResponse
+    {
+        try {
+            return $this->responseJson(
+                $this->courseService->delete($id),
+                Response::HTTP_OK,
+                __('Course deleted successfully.')
+            );
+        } catch (Exception $exception) {
+            return $this->responseErrorJson($exception);
+        }
+    }
 }
