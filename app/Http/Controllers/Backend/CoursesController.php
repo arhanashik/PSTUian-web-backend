@@ -32,15 +32,15 @@ class CoursesController extends BaseController
      */
     public function index(): JsonResponse
     {
-       try {
-         $courses = $this->courseService->getPaginatedDatata();
-         $status = Response::HTTP_OK;
-         $total = $courses['total'] ?? 0;
-         $message = 'Total ' . $total . ' ' . Str::plural('courses', $total) . ' found.';
-         return $this->responseJson($courses,$status,$message);
-       } catch (Exception $exception) {
-        return $this->responseErrorJson($exception);
-       }
+        try {
+            $courses = $this->courseService->getPaginatedDatata();
+            $status = Response::HTTP_OK;
+            $total = $courses['total'] ?? 0;
+            $message = 'Total ' . $total . ' ' . Str::plural('courses', $total) . ' found.';
+            return $this->responseJson($courses, $status, $message);
+        } catch (Exception $exception) {
+            return $this->responseErrorJson($exception);
+        }
     }
 
     /**

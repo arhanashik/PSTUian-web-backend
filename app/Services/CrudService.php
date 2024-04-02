@@ -1,10 +1,10 @@
-<?php 
+<?php
 
 declare(strict_types=1);
 
 namespace App\Services;
 
-use App\Services\ServiceInterface;
+use App\Interface\ServiceInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 abstract class CrudService implements ServiceInterface
