@@ -12,7 +12,7 @@ The next thing you can do to help us is by opening your heart. A small <a href="
 
 <br><br>
 
-<details open>
+<details>
 <summary><b>Installation Guideline</b></summary>
 
 -   Open Git Bash & run : `git clone https://github.com/arhanashik/PSTUian-web-backend.git` to clone repo
@@ -31,11 +31,20 @@ The next thing you can do to help us is by opening your heart. A small <a href="
 
 </details>
 
-<details open>
+<details>
 <summary><b>Database Seeding</b></summary>
 
 ```sh
 php artisan migrate:fresh --seed
 ```
+</details>
 
+</details>
+
+<details>
+<summary><b>Clear Cache in Laravel</b></summary>
+
+```sh
+php artisan optimize:clear 
+```
 </details>
