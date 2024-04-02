@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Backend;
 
+use App\Http\Requests\CourseRequest;
 use Exception;
 use Illuminate\Support\Str;
 use App\Services\CourseService;
@@ -40,5 +41,40 @@ class CoursesController extends BaseController
        } catch (Exception $exception) {
         return $this->responseErrorJson($exception);
        }
+    }
+
+    /**
+     * @OA\POST(
+     *     path="/api/v1/backend/courses",
+     *     tags={"Courses"},
+     *     summary="Add new course",
+     *     description="",
+     *     security={{"bearer":{}}},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"course_code", "course_title", "credit_hour", "faculty_id"},
+     *             @OA\Property(property="course_code", type="string", example="CCE-311"),
+     *             @OA\Property(property="course_title", type="string", example="Computer & Communication Engineering"),
+     *             @OA\Property(property="credit_hour", type="string", example="27"),
+     *             @OA\Property(property="faculty_id", type="number", example="1"),
+     *        ),
+     *    ),
+     *    @OA\Response(response=201,description="Course created successfully"),
+     *    @OA\Response(response=400, description="Bad request"),
+     *    @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
+    public function store(CourseRequest $request): JsonResponse
+    {
+        try {
+            return $this->responseJson(
+                $this->courseService->create(($request->all())),
+                Response::HTTP_CREATED,
+                __('Course saved successfully.')
+            );
+        } catch (Exception $exception) {
+            return $this->responseErrorJson($exception);
+        }
     }
 }
