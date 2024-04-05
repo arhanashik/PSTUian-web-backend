@@ -4,6 +4,7 @@ use App\Http\Controllers\Backend\AccountOptionController;
 use App\Http\Controllers\Backend\CoursesController;
 use App\Http\Controllers\Backend\DonationsController;
 use App\Http\Controllers\Backend\FacultyController;
+use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
 // Donations
@@ -17,3 +18,6 @@ Route::apiResource('faculties', FacultyController::class)->only(['index', 'store
 
 // Courses
 Route::apiResource('courses', CoursesController::class)->only(['index', 'store', 'update', 'destroy']);
+
+// Students
+Route::apiResource('students', StudentController::class)->only(['index', 'store', 'update', 'destroy']);
