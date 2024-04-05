@@ -40,4 +40,29 @@ class StudentController extends BaseController
             return $this->responseErrorJson($exception);
         }
     }
+
+    /**
+     * @OA\GET(
+     *     path="/api/v1/backend/students/all",
+     *     tags={"Students"},
+     *     summary="Get Students list as array",
+     *     description="",
+     *     security={{"bearer":{}}},
+     *     @OA\Response(response=200,description="Get Students list as array"),
+     *     @OA\Response(response=400, description="Bad request"),
+     *     @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
+    public function all(): JsonResponse
+    {
+        try {
+            $courses = $this->studentService->all();
+            $status = Response::HTTP_OK;
+            $total = $courses['total'] ?? 0;
+            $message = 'Total ' . $total . ' ' . Str::plural('students', $total) . ' found.';
+            return $this->responseJson($courses, $status, $message);
+        } catch (Exception $exception) {
+            return $this->responseErrorJson($exception);
+        }
+    }
 }
