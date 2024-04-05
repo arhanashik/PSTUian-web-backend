@@ -4,7 +4,7 @@ use App\Http\Controllers\Backend\AccountOptionController;
 use App\Http\Controllers\Backend\CoursesController;
 use App\Http\Controllers\Backend\DonationsController;
 use App\Http\Controllers\Backend\FacultyController;
-use App\Http\Controllers\StudentController;
+use App\Http\Controllers\Backend\StudentController;
 use Illuminate\Support\Facades\Route;
 
 // Donations
