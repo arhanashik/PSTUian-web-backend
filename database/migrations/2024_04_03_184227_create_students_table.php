@@ -13,24 +13,26 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('reg');
-            $table->string('phone')->nullable();
-            $table->string('linked_in')->nullable();
-            $table->string('blood')->nullable();
-            $table->string('address')->nullable();
-            $table->string('email')->nullable();
+            $table->string('s_id', 20)->unique();
+            $table->string('name', 50);
+            $table->integer('reg')->unique();
+            $table->string('phone', 20)->nullable();
+            $table->string('linked_in', 100)->nullable();
+            $table->string('blood', 5)->nullable();
+            $table->string('address', 200)->nullable();
+            $table->string('email', 100)->nullable()->unique();
             $table->unsignedBigInteger('batch_id');
             $table->unsignedBigInteger('session_id');
             $table->unsignedBigInteger('faculty_id');
-            $table->string('fb_link')->nullable();
-            $table->string('image_url')->nullable();
-            $table->string('cv_link', 500)->nullable();
-            $table->string('password', 500);
+            $table->string('fb_link', 100)->nullable();
+            $table->string('image_url', 100)->nullable();
+            $table->string('cv_link', 100)->nullable();
+            $table->string('password');
             $table->text('bio')->nullable();
             $table->boolean('deleted')->default(false);
             $table->timestamps();
         });
+        
     }
 
     /**
