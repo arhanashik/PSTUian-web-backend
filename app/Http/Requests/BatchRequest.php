@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Requests;
+declare(strict_types=1);
 
-use Illuminate\Foundation\Http\FormRequest;
+namespace App\Http\Requests;
 
 class BatchRequest extends FormRequest
 {

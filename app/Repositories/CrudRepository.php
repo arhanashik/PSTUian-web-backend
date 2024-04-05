@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Repositories;
 
+use App\Enum\DeleteStatus;
+
 class CrudRepository
 {
     /**
@@ -67,5 +69,17 @@ class CrudRepository
     public function findByColumn(string $column, string $value): ?object
     {
         return $this->model::where($column, $value)->first();
+    }
+
+    public function softDelete(object $model): ?object
+    {
+        $model->update(['deleted' => DeleteStatus::SOFT_DELETE]);
+        return $model;
+    }
+
+    public function hardDelete(object $model): ?object
+    {
+        $model->update(['deleted' => DeleteStatus::HARD_DELETE]);
+        return $model;
     }
 }

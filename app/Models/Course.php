@@ -7,15 +7,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Batch extends Model
+class Course extends Model
 {
     use HasFactory;
+
     protected $fillable = [
-        'faculty_id',
-        'name',
-        'title',
-        'session',
-        'total_student',
-        'deleted'
+      'course_code',
+      'course_title',
+      'credit_hour',
+      'faculty_id',
     ];
 }

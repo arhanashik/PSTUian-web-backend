@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-use App\Helper\Constant;
+use App\Enum\DeleteStatus;
 use App\Models\Batch;
 use App\Repositories\BatchRepository;
 
@@ -24,11 +24,11 @@ class BatchService
 
     public function getPaginatedBatches(?int $perPage = null, $filters = []): array
     {
-        $filters['deleted'] = Constant::NOT_DELETED;
+        $filters['deleted'] = DeleteStatus::NOT_DELETED;
         return $this->batchRepository->paginate($perPage, $filters);
     }
 
-    public function getBatch(int $id)
+    public function getBatch(int $id): Batch
     {
         return $this->batchRepository->find($id);
     }
@@ -57,6 +57,6 @@ class BatchService
             throw new NotFoundHttpException(__(self::NOT_FOUND_MESSAGE));
         }
 
-        return $this->batchRepository->deleteBatch($batch);
+        return $this->batchRepository->softDelete($batch);
     }
 }
