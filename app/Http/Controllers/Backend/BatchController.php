@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Backend;
 
 use Exception;
+use App\Enum\DeleteStatus;
 use Illuminate\Support\Str;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\BatchRequest;
@@ -33,7 +34,10 @@ class BatchController extends BaseController
     public function index(): JsonResponse
     {
         try {
-            $batches = $this->batchService->getPaginatedBatches();
+            $batches = $this->batchService->getPaginatedData(
+                null,
+                ['deleted' => DeleteStatus::NOT_DELETED]
+            );
             $total = $batches['total'] ?? 0;
             $message = 'Total ' . $total . ' ' . Str::plural('batch', $total) . ' found.';
 
@@ -59,7 +63,7 @@ class BatchController extends BaseController
     public function show(int $id): JsonResponse
     {
         try {
-            $batch = $this->batchService->getBatch($id);
+            $batch = $this->batchService->getById($id);
             return $this->responseJson($batch, Response::HTTP_OK, $batch ? __('Batch found') : __('Batch not found'));
         } catch (Exception $exception) {
             return $this->responseErrorJson($exception);
@@ -93,7 +97,7 @@ class BatchController extends BaseController
     {
         try {
             return $this->responseJson(
-                $this->batchService->storeBatch($request->all()),
+                $this->batchService->create($request->all()),
                 Response::HTTP_CREATED,
                 __('Batch saved successfully.')
             );
@@ -131,7 +135,7 @@ class BatchController extends BaseController
     {
         try {
             return $this->responseJson(
-                $this->batchService->updateBatch($id, $request->all()),
+                $this->batchService->update($id, $request->all()),
                 Response::HTTP_OK,
                 __('Batch updated successfully.')
             );
@@ -181,13 +185,12 @@ class BatchController extends BaseController
     {
         try {
             return $this->responseJson(
-                $this->batchService->deleteBatch($id),
+                $this->batchService->delete($id),
                 Response::HTTP_OK,
-                __('Batch delete successfully.')
+                __('Batch deleted successfully.')
             );
         } catch (Exception $exception) {
             return $this->responseErrorJson($exception);
         }
     }
-
 }
