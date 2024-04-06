@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Frontend;
 
 use Exception;
+use App\Enum\DeleteStatus;
 use Illuminate\Support\Str;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\DonationRequest;
@@ -33,7 +34,9 @@ class DonationsController extends BaseController
     public function index(): JsonResponse
     {
         try {
-            $donations = $this->donationService->getDonations();
+            $donations = $this->donationService->all(
+                ['deleted' => DeleteStatus::NOT_DELETED]
+            );
             $message = 'Total ' . count($donations) . ' ' . Str::plural('donation', count($donations)) . ' found.';
 
             return $this->responseJson($donations, Response::HTTP_OK, $message);
@@ -68,7 +71,7 @@ class DonationsController extends BaseController
     {
         try {
             return $this->responseJson(
-                $this->donationService->createDonation($request->all()),
+                $this->donationService->create($request->all()),
                 Response::HTTP_CREATED,
                 __('Your Donation request has been saved successfully.')
             );
