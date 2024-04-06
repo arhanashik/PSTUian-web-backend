@@ -26,6 +26,7 @@ class BatchController extends BaseController
      *     tags={"Backend-Batches"},
      *     summary="Get Batch List as Array",
      *     description="Get Batch List as Array",
+     *     @OA\Parameter(name="deleted", description="Delete type, Not Deleted=0, Soft=1, Hard=9", example="0", required=false, in="query", @OA\Schema(type="integer")),
      *     security={{"bearer":{}}},
      *     @OA\Response(response=200,description="Get Batch List as Array"),
      *     @OA\Response(response=400, description="Bad request"),
@@ -37,7 +38,7 @@ class BatchController extends BaseController
         try {
             $batches = $this->batchService->getPaginatedData(
                 null,
-                ['deleted' => DeleteStatus::NOT_DELETED]
+                ['deleted' => request()->deleted ?? DeleteStatus::NOT_DELETED]
             );
             $total = $batches['total'] ?? 0;
             $message = 'Total ' . $total . ' ' . Str::plural('batch', $total) . ' found.';
@@ -161,7 +162,7 @@ class BatchController extends BaseController
      *              format="int64"
      *          )
      *      ),
-     *      @OA\Parameter(name="delete_type", description="Delete type, Soft=1, Hard=9, Keep empty for permanent delete", example="1", required=false, in="query", @OA\Schema(type="integer")),
+     *      @OA\Parameter(name="deleted", description="Delete type, Soft=1, Hard=9, Keep empty for permanent delete", example="1", required=false, in="query", @OA\Schema(type="integer")),
      *      @OA\Response(
      *          response=200,
      *          description="Batch deleted successful",
@@ -190,7 +191,7 @@ class BatchController extends BaseController
             return $this->responseJson(
                 $this->batchService->delete(
                     $id,
-                    $request->delete_type ?? DeleteStatus::SOFT_DELETE
+                    $request->deleted ?? DeleteStatus::SOFT_DELETE
                 ),
                 Response::HTTP_OK,
                 __('Batch deleted successfully.')
