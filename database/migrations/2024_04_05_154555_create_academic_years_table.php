@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sessions', function (Blueprint $table) {
+        Schema::create('academic_years', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 255);
             $table->boolean('deleted')->default(false);
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sessions');
+        Schema::dropIfExists('academic_years');
     }
 };

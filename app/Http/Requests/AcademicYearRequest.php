@@ -6,7 +6,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Validation\Rule;
 
-class SessionRequest extends FormRequest
+class AcademicYearRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,16 +23,16 @@ class SessionRequest extends FormRequest
      */
     public function rules(): array
     {
-        $SessionId = $this->route('session');
+        $AcademicYearId = $this->route('academicyear');
 
         $rules = [
             'name' => ['required', 'string', 'max:255'],
         ];
 
         if ($this->isMethod('PUT') || $this->isMethod('PATCH')) {
-            $rules['name'][] = Rule::unique('sessions')->ignore($SessionId);
+            $rules['name'][] = Rule::unique('academic_years')->ignore($AcademicYearId);
         } else {
-            $rules['name'][] = 'unique:sessions,name';
+            $rules['name'][] = 'unique:academic_years,name';
         }
 
         return $rules;

@@ -1,10 +1,10 @@
 <?php
 
+use App\Http\Controllers\Backend\AcademicYearController;
 use App\Http\Controllers\Backend\AccountOptionController;
 use App\Http\Controllers\Backend\CoursesController;
 use App\Http\Controllers\Backend\DonationsController;
 use App\Http\Controllers\Backend\FacultyController;
-use App\Http\Controllers\Backend\SessionController;
 use App\Http\Controllers\Backend\StudentController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,5 +24,5 @@ Route::apiResource('courses', CoursesController::class)->only(['index', 'store',
 Route::apiResource('students', StudentController::class)->only(['index', 'store', 'update', 'destroy']);
 Route::get('/students/all', [StudentController::class, 'all'])->name('students.all');
 
-// Sessions
-Route::apiResource('sessions', SessionController::class)->only(['index', 'store', 'update', 'destroy']);
+// AcademicYear
+Route::apiResource('academicyears', AcademicYearController::class)->only(['index', 'store', 'update', 'destroy']);
