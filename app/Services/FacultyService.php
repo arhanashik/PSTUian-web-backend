@@ -8,13 +8,17 @@ use App\Models\Faculty;
 use App\Repositories\FacultyRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class FacultyService
+class FacultyService extends CrudService
 {
-    const NOT_FOUND_MESSAGE = "Faculty not found";
+    const NOT_FOUND_MESSAGE = 'Faculty not found';
 
     public function __construct(
         private readonly FacultyRepository $facultyRepository
     ) {
+        parent::__construct(
+            $facultyRepository,
+            fn() => __('Faculty not found.')
+        );
     }
 
     public function getFaculties(): array
