@@ -4,29 +4,42 @@ declare(strict_types=1);
 
 namespace App\Services;
 
+use App\Enum\DeleteStatus;
 use App\Interface\ServiceInterface;
+use App\Repositories\CrudRepository;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Eloquent\Model;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 abstract class CrudService implements ServiceInterface
 {
     protected $generateErrorMessage;
 
-    public function __construct(protected $repository, callable $generateErrorMessage)
-    {
+    /**
+     * Entity Model.
+     *
+     * @var Model
+     */
+    protected Model $entity;
+
+    public function __construct(
+        protected CrudRepository $repository,
+        callable $generateErrorMessage
+    ) {
         $this->generateErrorMessage = $generateErrorMessage;
     }
 
     public function getById(int $id): ?object
     {
-        $entity = $this->repository->find($id);
-        if (!$entity) {
+        $this->entity = $this->repository->find($id);
+        if (!$this->entity) {
             $errorMessage = call_user_func($this->generateErrorMessage);
             throw new NotFoundHttpException($errorMessage);
         }
-        return $entity;
+        return $this->entity;
     }
 
-    public function getPaginatedDatata(?int $perPage = null, $filters = []): array
+    public function getPaginatedData(?int $perPage = null, $filters = []): array
     {
         return $this->repository->paginate($perPage, $filters);
     }
@@ -38,22 +51,35 @@ abstract class CrudService implements ServiceInterface
 
     public function update(int $id, array $data): ?object
     {
-        $entity = $this->repository->find($id);
-        if (!$entity) {
+        $this->entity = $this->repository->find($id);
+        if (!$this->entity) {
             $errorMessage = call_user_func($this->generateErrorMessage);
             throw new NotFoundHttpException($errorMessage);
         }
-        return $this->repository->update($entity, $data);
+        return $this->repository->update($this->entity, $data);
     }
 
-    public function delete(int $id): object
+    public function delete(int $id, $deleteStatus = DeleteStatus::SOFT_DELETE): object
     {
-        $entity = $this->repository->find($id);
-        if (!$entity) {
+        $this->entity = $this->repository->find($id);
+        if (!$this->entity) {
             $errorMessage = call_user_func($this->generateErrorMessage);
             throw new NotFoundHttpException($errorMessage);
         }
-        return $this->repository->delete($entity);
+
+        // Check if model has the column deleted, then do soft/hard delete.
+        $hasDelete = Schema::hasColumn($this->entity->getTable(), 'deleted');
+
+        if ($hasDelete && $deleteStatus === DeleteStatus::SOFT_DELETE) {
+            return $this->repository->softDelete($this->entity);
+        }
+
+        if ($hasDelete && $deleteStatus === DeleteStatus::HARD_DELETE) {
+            return $this->repository->hardDelete($this->entity);
+        }
+
+        // Otherwise delete totally from the model.
+        return $this->repository->delete($this->entity);
     }
 
     public function all(): array
