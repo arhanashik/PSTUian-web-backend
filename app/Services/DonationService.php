@@ -20,9 +20,9 @@ class DonationService extends CrudService
         );
     }
 
-    public function confirmDonation(string $reference): Donation
+    public function confirm(int $id): Donation
     {
-        $donation = $this->donationRepository->findByReference($reference);
+        $donation = $this->donationRepository->find($id);
 
         if (!$donation) {
             throw new NotFoundHttpException(__(self::DONATION_NOT_FOUND_MESSAGE));
@@ -31,9 +31,9 @@ class DonationService extends CrudService
         return $this->donationRepository->confirm($donation);
     }
 
-    public function unconfirmDonation(string $reference): Donation
+    public function unconfirm(int $id): Donation
     {
-        $donation = $this->donationRepository->findByReference($reference);
+        $donation = $this->donationRepository->find($id);
 
         if (!$donation) {
             throw new NotFoundHttpException(self::DONATION_NOT_FOUND_MESSAGE);

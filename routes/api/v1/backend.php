@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Route;
 
 // Donations
 Route::apiResource('donations', DonationsController::class)->only(['index', 'update', 'destroy']);
+Route::put('donations/confirm/{id}', [DonationsController::class, 'confirm']);
+Route::put('donations/unconfirm/{id}', [DonationsController::class, 'unconfirm']);
 
 // Batches
 Route::apiResource('batches', BatchController::class);

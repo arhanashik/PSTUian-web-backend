@@ -48,6 +48,108 @@ class DonationsController extends BaseController
         }
     }
 
+    /**
+     * @OA\PUT(
+     *      path="/api/v1/backend/donations/confirm/{id}",
+     *      tags={"Backend-Donations"},
+     *      summary="Confirm Donation",
+     *      description="Confirm Donation by its ID",
+     *      @OA\Parameter(
+     *          name="id",
+     *          in="path",
+     *          required=true,
+     *          description="ID of the donation to confirm",
+     *          @OA\Schema(
+     *              type="integer",
+     *              format="int64"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Donation confirmed successful",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string",
+     *                  example="Donation confirmed successfully."
+     *              )
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Donation not found"
+     *      ),
+     *      @OA\Response(
+     *          response=500,
+     *          description="Internal server error"
+     *      )
+     * )
+     */
+    public function confirm(int $id): JsonResponse
+    {
+        try {
+            return $this->responseJson(
+                $this->donationService->confirm($id),
+                Response::HTTP_OK,
+                __('Donation confirmed successfully.')
+            );
+        } catch (Exception $exception) {
+            return $this->responseErrorJson($exception);
+        }
+    }
+
+
+    /**
+     * @OA\PUT(
+     *      path="/api/v1/backend/donations/unconfirm/{id}",
+     *      tags={"Backend-Donations"},
+     *      summary="Unconfirm Donation",
+     *      description="Unconfirm Donation by its ID",
+     *      @OA\Parameter(
+     *          name="id",
+     *          in="path",
+     *          required=true,
+     *          description="ID of the donation to unconfirm",
+     *          @OA\Schema(
+     *              type="integer",
+     *              format="int64"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Donation unconfirmed successful",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string",
+     *                  example="Donation unconfirmed successfully."
+     *              )
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Donation not found"
+     *      ),
+     *      @OA\Response(
+     *          response=500,
+     *          description="Internal server error"
+     *      )
+     * )
+     */
+    public function unconfirm(int $id): JsonResponse
+    {
+        try {
+            return $this->responseJson(
+                $this->donationService->unconfirm($id),
+                Response::HTTP_OK,
+                __('Donation unconfirmed successfully.')
+            );
+        } catch (Exception $exception) {
+            return $this->responseErrorJson($exception);
+        }
+    }
 
     /**
      * @OA\Delete(
