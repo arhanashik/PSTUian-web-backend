@@ -31,7 +31,7 @@ class StudentController extends BaseController
     public function index(): JsonResponse
     {
         try {
-            $courses = $this->studentService->getPaginatedDatata();
+            $courses = $this->studentService->getPaginatedData();
             $status = Response::HTTP_OK;
             $total = $courses['total'] ?? 0;
             $message = 'Total ' . $total . ' ' . Str::plural('students', $total) . ' found.';

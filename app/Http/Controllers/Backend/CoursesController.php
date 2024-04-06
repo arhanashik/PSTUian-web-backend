@@ -33,7 +33,7 @@ class CoursesController extends BaseController
     public function index(): JsonResponse
     {
         try {
-            $courses = $this->courseService->getPaginatedDatata();
+            $courses = $this->courseService->getPaginatedData();
             $status = Response::HTTP_OK;
             $total = $courses['total'] ?? 0;
             $message = 'Total ' . $total . ' ' . Str::plural('courses', $total) . ' found.';
