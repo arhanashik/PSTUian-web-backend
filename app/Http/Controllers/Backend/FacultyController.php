@@ -8,7 +8,6 @@ use Exception;
 use Illuminate\Support\Str;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\FacultyRequest;
-use App\Http\Requests\FacultyUpdateRequest;
 use App\Services\FacultyService;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -121,18 +120,18 @@ class FacultyController extends BaseController
      *     description="",
      *     @OA\Parameter(name="id", description="id, eg; 1", required=true, in="path", @OA\Schema(type="integer")),
      *     security={{"bearer":{}}},
-     *    @OA\Response(response=201,description="faculty updated successfully"),
-     *    @OA\Response(response=400, description="Bad request"),
-     *    @OA\Response(response=404, description="Resource Not Found"),
+     *     @OA\Response(response=201,description="faculty updated successfully"),
+     *     @OA\Response(response=400, description="Bad request"),
+     *     @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function showFacultyById(int $id): JsonResponse
+    public function show(int $id): JsonResponse
     {
         try {
             return $this->responseJson(
                 $this->facultyService->FacultyById($id),
                 Response::HTTP_CREATED,
-                __('Faculty fetch successfully.')
+                __('Faculty fetched successfully.')
             );
         } catch (Exception $exception) {
             return $this->responseErrorJson($exception);

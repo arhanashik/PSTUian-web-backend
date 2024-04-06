@@ -26,5 +26,4 @@ Route::apiResource('account-options', AccountOptionController::class)->only(['in
 Route::apiResource('employees', EmployeeController::class)->only(['index', 'show']);
 
 // Faculty
-Route::apiResource('faculties', FacultyController::class)->only(['index']);
-Route::get('/faculties/{id}', [FacultyController::class, 'showFacultyById'])->name('faculties.showFacultyById');
+Route::apiResource('faculties', FacultyController::class)->only(['index', 'show']);
