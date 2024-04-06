@@ -16,7 +16,7 @@ class StudentService extends CrudService
     {
         parent::__construct(
             $studentRepository,
-            fn() => __('Student not found.')
+            fn() => __(self::NOT_FOUND_MESSAGE)
         );
     }
 }

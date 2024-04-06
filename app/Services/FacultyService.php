@@ -17,7 +17,7 @@ class FacultyService extends CrudService
     ) {
         parent::__construct(
             $facultyRepository,
-            fn() => __('Faculty not found.')
+            fn() => __(self::NOT_FOUND_MESSAGE)
         );
     }
 
