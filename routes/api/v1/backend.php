@@ -26,3 +26,4 @@ Route::get('/students/all', [StudentController::class, 'all'])->name('students.a
 
 // AcademicYear
 Route::apiResource('academicyears', AcademicYearController::class)->only(['index', 'store', 'update', 'destroy']);
+Route::delete('academicyears/hard-delete/{id}', [AcademicYearController::class, 'hardDestroy'])->name('faculties.hardDestroy');

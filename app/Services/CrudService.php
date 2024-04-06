@@ -56,6 +56,16 @@ abstract class CrudService implements ServiceInterface
         return $this->repository->delete($entity);
     }
 
+    public function forceDelete(int $id): object
+    {
+        $entity = $this->repository->findTrash($id);
+        if (!$entity) {
+            $errorMessage = call_user_func($this->generateErrorMessage);
+            throw new NotFoundHttpException($errorMessage);
+        }
+        return $this->repository->forceDelete($entity);
+    }
+
     public function all(): array
     {
         return $this->repository->all();

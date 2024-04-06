@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('academic_years', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 255);
-            $table->boolean('deleted')->default(false);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
