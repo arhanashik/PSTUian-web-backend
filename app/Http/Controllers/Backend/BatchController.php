@@ -11,6 +11,7 @@ use App\Http\Controllers\BaseController;
 use App\Http\Requests\BatchRequest;
 use App\Services\BatchService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class BatchController extends BaseController
@@ -143,6 +144,7 @@ class BatchController extends BaseController
             return $this->responseErrorJson($exception);
         }
     }
+
     /**
      * @OA\Delete(
      *      path="/api/v1/backend/batches/{id}",
@@ -159,6 +161,7 @@ class BatchController extends BaseController
      *              format="int64"
      *          )
      *      ),
+     *      @OA\Parameter(name="delete_type", description="Delete type, Soft=1, Hard=9, Keep empty for permanent delete", example="1", required=false, in="query", @OA\Schema(type="integer")),
      *      @OA\Response(
      *          response=200,
      *          description="Batch deleted successful",
@@ -181,11 +184,14 @@ class BatchController extends BaseController
      *      )
      * )
      */
-    public function destroy(int $id): JsonResponse
+    public function destroy(int $id, Request $request): JsonResponse
     {
         try {
             return $this->responseJson(
-                $this->batchService->delete($id),
+                $this->batchService->delete(
+                    $id,
+                    $request->delete_type ?? DeleteStatus::SOFT_DELETE
+                ),
                 Response::HTTP_OK,
                 __('Batch deleted successfully.')
             );

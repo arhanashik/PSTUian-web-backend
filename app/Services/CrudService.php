@@ -20,7 +20,7 @@ abstract class CrudService implements ServiceInterface
      *
      * @var Model
      */
-    protected Model $entity;
+    protected $entity;
 
     public function __construct(
         protected CrudRepository $repository,
