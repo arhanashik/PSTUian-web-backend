@@ -74,12 +74,14 @@ class CrudRepository
     public function softDelete(object $model): ?object
     {
         $model->update(['deleted' => DeleteStatus::SOFT_DELETE]);
+
         return $model;
     }
 
     public function hardDelete(object $model): ?object
     {
         $model->update(['deleted' => DeleteStatus::HARD_DELETE]);
+
         return $model;
     }
 }
