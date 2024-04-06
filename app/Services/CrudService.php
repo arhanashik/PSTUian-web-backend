@@ -70,6 +70,10 @@ abstract class CrudService implements ServiceInterface
         // Check if model has the column deleted, then do soft/hard delete.
         $hasDelete = Schema::hasColumn($this->entity->getTable(), 'deleted');
 
+        if ($hasDelete && $deleteStatus === DeleteStatus::NOT_DELETED) {
+            return $this->repository->revertBack($this->entity);
+        }
+
         if ($hasDelete && $deleteStatus === DeleteStatus::SOFT_DELETE) {
             return $this->repository->softDelete($this->entity);
         }

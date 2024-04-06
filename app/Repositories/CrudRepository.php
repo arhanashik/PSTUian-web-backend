@@ -71,6 +71,13 @@ class CrudRepository
         return $this->model::where($column, $value)->first();
     }
 
+    public function revertBack(object $model): ?object
+    {
+        $model->update(['deleted' => DeleteStatus::NOT_DELETED]);
+
+        return $model;
+    }
+
     public function softDelete(object $model): ?object
     {
         $model->update(['deleted' => DeleteStatus::SOFT_DELETE]);
