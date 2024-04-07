@@ -10,7 +10,7 @@ interface ServiceInterface
 
     public function update(int $id, array $data): ?object;
 
-    public function delete(int $id): object;
+    public function delete(int $id, int $status): object;
 
     public function getById(int $id): ?object;
 

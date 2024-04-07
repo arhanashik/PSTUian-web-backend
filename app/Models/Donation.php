@@ -14,5 +14,6 @@ class Donation extends Model
         'info',
         'email',
         'reference',
+        'deleted'
     ];
 }

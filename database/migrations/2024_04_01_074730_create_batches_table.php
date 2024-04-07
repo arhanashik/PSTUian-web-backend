@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Enum\DeleteStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -20,9 +21,8 @@ return new class extends Migration
             $table->string('title')->nullable();
             $table->string('session', 20);
             $table->unsignedInteger('total_student')->default(0);
-            $table->unsignedTinyInteger('deleted')->default(0);
+            $table->unsignedTinyInteger('deleted')->default(DeleteStatus::NOT_DELETED);
             $table->timestamps();
-
             $table->foreign('faculty_id')
                 ->references('id')
                 ->on('faculties')

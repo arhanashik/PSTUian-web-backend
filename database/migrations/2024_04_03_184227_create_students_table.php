@@ -7,8 +7,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -20,22 +19,34 @@ return new class extends Migration
             $table->string('name', 50);
             $table->integer('reg')->unique();
             $table->string('phone', 20)->nullable();
-            $table->string('linked_in', 100)->nullable();
+            $table->string('linked_in', 100)->nullable()->unique();;
             $table->string('blood', 5)->nullable();
             $table->string('address', 200)->nullable();
             $table->string('email', 100)->nullable()->unique();
             $table->unsignedBigInteger('batch_id');
-            $table->unsignedBigInteger('session_id');
+            $table->unsignedBigInteger('academicyear_id');
             $table->unsignedBigInteger('faculty_id');
-            $table->string('fb_link', 100)->nullable();
+            $table->string('fb_link', 100)->nullable()->unique();
             $table->string('image_url', 100)->nullable();
             $table->string('cv_link', 100)->nullable();
             $table->string('password');
             $table->text('bio')->nullable();
             $table->unsignedTinyInteger('deleted')->default(DeleteStatus::NOT_DELETED);
+            $table->foreign('faculty_id')
+                ->references('id')
+                ->on('faculties')
+                ->onDelete('cascade');
+            $table->foreign('batch_id')
+                ->references('id')
+                ->on('batches')
+                ->onDelete('cascade');
+            $table->foreign('academicyear_id')
+                ->references('id')
+                ->on('academic_years')
+                ->onDelete('cascade');
             $table->timestamps();
         });
-        
+
     }
 
     /**

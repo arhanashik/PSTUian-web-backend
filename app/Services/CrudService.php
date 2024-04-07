@@ -59,7 +59,7 @@ abstract class CrudService implements ServiceInterface
         return $this->repository->update($this->entity, $data);
     }
 
-    public function delete(int $id, $deleteStatus = DeleteStatus::SOFT_DELETE): object
+    public function delete(int $id, int $deleteStatus): object
     {
         $this->entity = $this->repository->find($id);
         if (!$this->entity) {
@@ -70,20 +70,20 @@ abstract class CrudService implements ServiceInterface
         // Check if model has the column deleted, then do soft/hard delete.
         $hasDelete = Schema::hasColumn($this->entity->getTable(), 'deleted');
 
-        if ($hasDelete && $deleteStatus === DeleteStatus::NOT_DELETED) {
+        if ($hasDelete && $deleteStatus === DeleteStatus::NOT_DELETED->value) {
             return $this->repository->revertBack($this->entity);
         }
 
-        if ($hasDelete && $deleteStatus === DeleteStatus::SOFT_DELETE) {
+        if ($hasDelete && $deleteStatus === DeleteStatus::SOFT_DELETE->value) {
             return $this->repository->softDelete($this->entity);
         }
 
-        if ($hasDelete && $deleteStatus === DeleteStatus::HARD_DELETE) {
+        if ($hasDelete && $deleteStatus === DeleteStatus::HARD_DELETE->value) {
             return $this->repository->hardDelete($this->entity);
         }
 
         // Otherwise delete totally from the model.
-        return $this->repository->delete($this->entity);
+        return $this->repository->Delete($this->entity);
     }
 
     public function all(array $filters = []): array

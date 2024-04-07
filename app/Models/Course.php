@@ -16,5 +16,6 @@ class Course extends Model
       'course_title',
       'credit_hour',
       'faculty_id',
+      'deleted'
     ];
 }

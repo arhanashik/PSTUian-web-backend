@@ -24,7 +24,6 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->string('image_url')->nullable();
             $table->unsignedTinyInteger('deleted')->default(DeleteStatus::NOT_DELETED);
-
             $table->foreign('faculty_id')
                 ->references('id')
                 ->on('faculties')

@@ -13,5 +13,6 @@ class AccountsOption extends Model
 
     protected $fillable = [
         'donation_option',
+        'deleted'
     ];
 }

@@ -196,13 +196,15 @@ class EmployeeController extends BaseController
     public function destroy(int $id, Request $request): JsonResponse
     {
         try {
+            $deleteStatusInt = (int)$request->deleted ?? DeleteStatus::SOFT_DELETE;
+            
             return $this->responseJson(
                 $this->employeeService->delete(
                     $id,
-                    $request->deleted ?? DeleteStatus::SOFT_DELETE
+                    $deleteStatusInt
                 ),
                 Response::HTTP_OK,
-                __('Employee deleted successfully.')
+                __('Employee deleted state successfully update.')
             );
         } catch (Exception $exception) {
             return $this->responseErrorJson($exception);

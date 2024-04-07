@@ -17,6 +17,7 @@ class Employee extends Model
         'department',
         'phone',
         'address',
+        'deleted',
         'image_url',
         'faculty_id'
     ];

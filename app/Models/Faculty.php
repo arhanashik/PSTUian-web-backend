@@ -14,5 +14,6 @@ class Faculty extends Model
     protected $fillable = [
         'short_title',
         'title',
+        'deleted'
     ];
 }
