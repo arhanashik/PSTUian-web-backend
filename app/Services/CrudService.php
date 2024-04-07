@@ -86,7 +86,7 @@ abstract class CrudService implements ServiceInterface
         return $this->repository->Delete($this->entity);
     }
 
-    public function all(array $filters = []): array
+    public function all(): array
     {
         return $this->repository->all($filters);
     }

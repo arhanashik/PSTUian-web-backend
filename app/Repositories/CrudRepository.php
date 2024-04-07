@@ -61,9 +61,21 @@ class CrudRepository
         return $model;
     }
 
+    public function forceDelete(object $model): object
+    {
+        $model->forceDelete();
+
+        return $model;
+    }
+
     public function find(int $id): ?object
     {
         return $this->model::find($id);
+    }
+
+    public function findTrash(int $id): ?object
+    {
+        return $this->model::withTrashed()->find($id);
     }
 
     public function findByColumn(string $column, string $value): ?object

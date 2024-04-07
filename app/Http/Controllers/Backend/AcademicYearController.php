@@ -160,7 +160,44 @@ class AcademicYearController extends BaseController
                     $deleteStatusInt
                 ),
                 Response::HTTP_OK,
-                __('Academic-Year deleted successfully.')
+                __('Academic-Year softly deleted successfully.')
+            );
+        } catch (Exception $exception) {
+            return $this->responseErrorJson($exception);
+        }
+    }
+
+    /**
+     * @OA\DELETE(
+     *     path="/api/v1/backend/academicyears/hard-delete/{id}",
+     *     tags={"Academic-Year"},
+     *     summary="Parmanent delete a Academic-Year",
+     *     description="After soft delete if super-admin want to permanently delete",
+     *     @OA\Parameter(
+     *         name="id",
+     *         description="ID of the Soft-Deleted Academic-Year",
+     *         required=true,
+     *         in="path",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     security={{"bearer":{}}},
+     *     @OA\Response(
+     *         response=204,
+     *         description="Academic-Year parmanently deleted successfully"
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="No soft deleted academic year found"
+     *     )
+     * )
+     */
+    public function hardDestroy(int $id): JsonResponse
+    {
+        try {
+            return $this->responseJson(
+                $this->academicyearservice->forceDelete($id),
+                Response::HTTP_OK,
+                __('Academic-Year parmanently deleted successfully.')
             );
         } catch (Exception $exception) {
             return $this->responseErrorJson($exception);
