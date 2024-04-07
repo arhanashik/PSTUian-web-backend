@@ -23,6 +23,10 @@ return new class extends Migration
             $table->boolean('status')->default(false);
             $table->unsignedTinyInteger('deleted')->default(DeleteStatus::NOT_DELETED);
             $table->timestamps();
+            $table->foreign('faculty_id')
+                ->references('id')
+                ->on('faculties')
+                ->onDelete('cascade');
         });
     }
 
