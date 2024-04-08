@@ -193,13 +193,14 @@ class DonationsController extends BaseController
     public function destroy(int $id, Request $request): JsonResponse
     {
         try {
+            $deleteStatusInt = (int)$request->deleted ?? DeleteStatus::SOFT_DELETE;
             return $this->responseJson(
                 $this->donationService->delete(
                     $id,
-                    $request->deleted ?? DeleteStatus::SOFT_DELETE
+                    $deleteStatusInt
                 ),
                 Response::HTTP_OK,
-                __('Donation deleted successfully.')
+                __('Donation deleted state successfully update.')
             );
         } catch (Exception $exception) {
             return $this->responseErrorJson($exception);

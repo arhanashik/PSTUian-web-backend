@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
+
 class DonationRequest extends FormRequest
 {
     /**
@@ -25,7 +27,12 @@ class DonationRequest extends FormRequest
             'name' => ['nullable', 'string', 'max:100'],
             'info' => ['nullable', 'string', 'max:500'],
             'email' => ['nullable', 'string', 'email', 'max:150'],
-            'reference' => ['required', 'string', 'max:150'],
+            'reference' => [
+                Rule::unique('donations')->ignore($this->donation),
+                'required', 
+                'string', 
+                'max:150'
+            ],
         ];
     }
 }

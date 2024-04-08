@@ -82,10 +82,10 @@ class BatchController extends BaseController
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             required={"name", "session", "faculty_id", "total_student"},
+     *             required={"name", "academicyear_id", "faculty_id", "total_student"},
      *             @OA\Property(property="name", type="string", example="CSE 12th Batch", description="Name of the batch"),
      *             @OA\Property(property="title", type="string", example="Baundule 12", description="Title of the batch"),
-     *             @OA\Property(property="session", type="string", example="2014-15", description="Session of the batch"),
+     *             @OA\Property(property="academicyear_id", type="integer", example=1, description="Academic year Id of the batch"),
      *             @OA\Property(property="faculty_id", type="integer", example="1", description="Faculty id of the batch"),
      *             @OA\Property(property="total_student", type="integer", example="67", description="Total students in the batch"),
      *        ),
@@ -114,23 +114,23 @@ class BatchController extends BaseController
      *     tags={"Backend-Batches"},
      *     summary="Update batch",
      *     description="Update batch by ID",
-     *     @OA\Parameter(name="id", description="id, eg; 1", required=true, in="path", @OA\Schema(type="integer")),
-     *     @OA\Parameter(name="_method", description="PUT / POST", example="PUT", required=true, in="query", @OA\Schema(type="string")),
+     *     @OA\Parameter(name="id", description="ID of the batch", required=true, in="path", @OA\Schema(type="integer")),
+     *     @OA\Parameter(name="_method", description="HTTP method (PUT / POST)", example="PUT", required=true, in="query", @OA\Schema(type="string")),
      *     security={{"bearer":{}}},
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     * *             required={"name", "session", "faculty_id", "total_student"},
-     * *             @OA\Property(property="name", type="string", example="CSE 12th Batch", description="Name of the batch"),
-     * *             @OA\Property(property="title", type="string", example="Baundule 12", description="Title of the batch"),
-     * *             @OA\Property(property="session", type="string", example="2014-15", description="Session of the batch"),
-     * *             @OA\Property(property="faculty_id", type="integer", example="1", description="Faculty id of the batch"),
-     * *             @OA\Property(property="total_student", type="integer", example="67", description="Total students in the batch"),
-     * *        ),
-     *    ),
-     *    @OA\Response(response=201,description="Batch updated successfully"),
-     *    @OA\Response(response=400, description="Bad request"),
-     *    @OA\Response(response=404, description="Resource Not Found"),
+     *             required={"name", "academicyear_id", "faculty_id", "total_student"},
+     *             @OA\Property(property="name", type="string", example="CSE 12th Batch", description="Name of the batch"),
+     *             @OA\Property(property="title", type="string", example="Baundule 12", description="Title of the batch"),
+     *             @OA\Property(property="academicyear_id", type="integer", example=1, description="academic year id of the batch"),
+     *             @OA\Property(property="faculty_id", type="integer", example=1, description="Faculty ID of the batch"),
+     *             @OA\Property(property="total_student", type="integer", example=67, description="Total students in the batch")
+     *         )
+     *     ),
+     *     @OA\Response(response=201, description="Batch updated successfully"),
+     *     @OA\Response(response=400, description="Bad request"),
+     *     @OA\Response(response=404, description="Resource Not Found")
      * )
      */
     public function update(BatchRequest $request, int $id): JsonResponse
@@ -188,13 +188,14 @@ class BatchController extends BaseController
     public function destroy(int $id, Request $request): JsonResponse
     {
         try {
+            $deleteStatusInt = (int)$request->deleted ?? DeleteStatus::SOFT_DELETE;
             return $this->responseJson(
                 $this->batchService->delete(
                     $id,
-                    $request->deleted ?? DeleteStatus::SOFT_DELETE
+                    $deleteStatusInt
                 ),
                 Response::HTTP_OK,
-                __('Batch deleted successfully.')
+                __('Batch deleted state successfully update.')
             );
         } catch (Exception $exception) {
             return $this->responseErrorJson($exception);

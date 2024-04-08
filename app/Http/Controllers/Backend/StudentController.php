@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Services\StudentService;
 use Exception;
+use App\Enum\DeleteStatus;
 use Illuminate\Support\Str;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\BaseController;
@@ -56,9 +57,11 @@ class StudentController extends BaseController
     public function all(): JsonResponse
     {
         try {
-            $courses = $this->studentService->all();
+            $courses = $this->studentService->all(
+                ['deleted' => request()->deleted ?? DeleteStatus::NOT_DELETED]
+            );
             $status = Response::HTTP_OK;
-            $total = $courses['total'] ?? 0;
+            $total = count($courses) ?? 0;
             $message = 'Total ' . $total . ' ' . Str::plural('students', $total) . ' found.';
             return $this->responseJson($courses, $status, $message);
         } catch (Exception $exception) {

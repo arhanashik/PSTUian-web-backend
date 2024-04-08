@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
+
 class BatchRequest extends FormRequest
 {
     /**
@@ -26,14 +28,19 @@ class BatchRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
+                Rule::unique('batches')->ignore($this->batche),
             ],
             'title' => [
                 'string',
+                Rule::unique('batches')->ignore($this->batche),
             ],
-            'session' => [
+            'academicyear_id' => [
                 'required',
-                'string',
-                'max:20',
+                'integer',
+            ],
+            'faculty_id' => [
+                'required',
+                'integer',
             ],
             'total_student' => [
                 'required',
@@ -53,10 +60,7 @@ class BatchRequest extends FormRequest
             'title.string' => 'Title must be a string.',
             'title.max' => 'Title may not be greater than :max characters.',
             'title.alpha' => 'Title may only contain alphabetic characters.',
-            'session.required' => 'Session field is required.',
-            'session.string' => 'Session must be a string.',
-            'session.max' => 'Session may not be greater than :max characters.',
-            'session.alpha' => 'Session may only contain alphabetic characters.',
+            'academicyear_id.required' => 'Academic year field is required.',
             'total_student.required' => 'Short title field is required.',
             'total_student.integer' => 'Total student must be an integer.',
         ];

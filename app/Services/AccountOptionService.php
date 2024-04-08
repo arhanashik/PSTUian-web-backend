@@ -21,8 +21,8 @@ class AccountOptionService
         return $this->accountOptionRepository->create($data);
     }
 
-    public function getAccountOptions(): array
+    public function all($filters = []): array
     {
-        return $this->accountOptionRepository->all();
+        return $this->accountOptionRepository->all($filters);
     }
 }

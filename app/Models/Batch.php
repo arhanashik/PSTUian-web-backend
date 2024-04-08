@@ -14,7 +14,7 @@ class Batch extends Model
         'faculty_id',
         'name',
         'title',
-        'session',
+        'academicyear_id',
         'total_student',
         'deleted'
     ];

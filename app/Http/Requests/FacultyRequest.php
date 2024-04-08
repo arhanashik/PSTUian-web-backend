@@ -23,31 +23,22 @@ class FacultyRequest extends FormRequest
      */
     public function rules(): array
     {
-        $facultyId = $this->route('faculty');
-
-        $rules = [
+        return [
             'short_title' => [
                 'required',
                 'string',
                 'max:50',
                 'alpha',
-                'regex:/^[a-zA-Z]+$/'
+                'regex:/^[a-zA-Z]+$/',
+                Rule::unique('faculties')->ignore($this->facultie),
             ],
             'title' => [
                 'required',
                 'string',
                 'max:150',
+                Rule::unique('faculties')->ignore($this->facultie),
             ],
         ];
-    
-        if ($this->isMethod('PUT') || $this->isMethod('PATCH')) {
-            $rules['short_title'][] = Rule::unique('faculties')->ignore($facultyId);
-            $rules['title'][] = Rule::unique('faculties')->ignore($facultyId);
-        } else {
-            $rules['short_title'][] = 'unique:faculties,short_title';
-            $rules['title'][] = 'unique:faculties,title';
-        }
-        return $rules;
     }
 
     public function messages(): array

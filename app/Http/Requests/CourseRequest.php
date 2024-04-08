@@ -23,17 +23,18 @@ class CourseRequest extends FormRequest
      */
     public function rules(): array
     {
-        $courseId = $this->route('course');
-        $rules = [
+        return [
             'course_code' => [
                 'required',
                 'string',
-                'max:20'
+                'max:20',
+                Rule::unique('courses')->ignore($this->course),
             ],
             'course_title' => [
                 'required',
                 'string',
-                'max:100'
+                'max:100',
+                Rule::unique('courses')->ignore($this->course),
             ],
             'credit_hour' => [
                 'required',
@@ -44,15 +45,5 @@ class CourseRequest extends FormRequest
                 'required'
             ],
         ];
-
-        if ($this->isMethod('PUT') || $this->isMethod('PATCH')) {
-            $rules['course_code'][] = Rule::unique('courses')->ignore($courseId);
-            $rules['course_title'][] = Rule::unique('courses')->ignore($courseId);
-        } else {
-            $rules['course_code'][] = 'unique:courses,course_code';
-            $rules['course_title'][] = 'unique:courses,course_title';
-        }
-
-        return $rules;
     }
 }

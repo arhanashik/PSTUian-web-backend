@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
+
 class AccountOptionRequest extends FormRequest
 {
     /**
@@ -22,7 +24,12 @@ class AccountOptionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'donation_option' => ['required', 'string', 'max:150'],
+            'donation_option' => [
+                'required', 
+                'string', 
+                'max:150',
+                Rule::unique('accounts_options')->ignore($this->accounts_option),
+            ],
         ];
     }
 }

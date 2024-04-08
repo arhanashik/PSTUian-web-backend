@@ -40,7 +40,7 @@ class AcademicYearController extends BaseController
                 ['deleted' => request()->deleted ?? DeleteStatus::NOT_DELETED]
             );
             $status = Response::HTTP_OK;
-            $total = $AcademicYear['total'] ?? 0;
+            $total = count($AcademicYear) ?? 0;
             $message = 'Total ' . $total . ' ' . Str::plural('AcademicYear', $total) . ' found.';
             return $this->responseJson($AcademicYear, $status, $message);
         } catch (Exception $exception) {
@@ -73,7 +73,7 @@ class AcademicYearController extends BaseController
             return $this->responseJson(
                 $this->academicyearservice->create(($request->all())),
                 Response::HTTP_CREATED,
-                __('Student saved successfully.')
+                __('Academic Year saved successfully.')
             );
         } catch (Exception $exception) {
             return $this->responseErrorJson($exception);
