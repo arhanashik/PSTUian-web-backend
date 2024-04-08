@@ -25,6 +25,7 @@ class DonationsController extends BaseController
      *     tags={"Frontend-Donations"},
      *     summary="Get Donation List as Array",
      *     description="Get Donation List as Array",
+     *     @OA\Parameter(name="deleted", description="Delete type, Not Deleted=0, Soft=1, Hard=9", example="0", required=false, in="query", @OA\Schema(type="integer")),
      *     security={{"bearer":{}}},
      *     @OA\Response(response=200,description="Get Donation List as Array"),
      *     @OA\Response(response=400, description="Bad request"),
@@ -73,7 +74,7 @@ class DonationsController extends BaseController
             return $this->responseJson(
                 $this->donationService->create($request->all()),
                 Response::HTTP_CREATED,
-                __('Your Donation request has been saved successfully.')
+                __('Donation saved successfully.')
             );
         } catch (Exception $exception) {
             return $this->responseErrorJson($exception);

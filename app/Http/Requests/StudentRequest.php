@@ -23,11 +23,11 @@ class StudentRequest extends FormRequest
      */
     public function rules(): array
     {
-        $StudentId = $this->route('student');
         $rules = [
             's_id' => [
                 'required',
-                'integer'
+                'integer',
+                Rule::unique('students')->ignore($this->student),
             ],
             'name' => [
                 'required',
@@ -40,12 +40,14 @@ class StudentRequest extends FormRequest
                 'required',
                 'string',
                 'email',
-                'max:100', // adjust the max length as needed
-                'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/'
+                'max:100',
+                'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',
+                Rule::unique('students')->ignore($this->student),
             ],
             'reg' => [
                 'required',
-                'integer'
+                'integer',
+                Rule::unique('students')->ignore($this->student),
             ],
             'faculty_id' => [
                 'required'
@@ -57,16 +59,6 @@ class StudentRequest extends FormRequest
                 'required'
             ],
         ];
-
-        if ($this->isMethod('PUT') || $this->isMethod('PATCH')) {
-            $rules['s_id'][] = Rule::unique('students')->ignore($StudentId);
-            $rules['name'][] = Rule::unique('students')->ignore($StudentId);
-            $rules['reg'][] = Rule::unique('students')->ignore($StudentId);
-        } else {
-            $rules['s_id'][] = 'unique:students,id';
-            $rules['name'][] = 'unique:students,name';
-            $rules['reg'][] = 'unique:students,reg';
-        }
 
         return $rules;
     }

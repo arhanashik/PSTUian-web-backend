@@ -10,6 +10,8 @@ use Illuminate\Support\Str;
 use App\Services\CourseService;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\BaseController;
+use Illuminate\Http\Request;
+use App\Enum\DeleteStatus;
 use Symfony\Component\HttpFoundation\Response;
 
 class CoursesController extends BaseController
@@ -23,6 +25,7 @@ class CoursesController extends BaseController
      *     path="/api/v1/backend/courses",
      *     tags={"Courses"},
      *     summary="Get courses list as array",
+     *     @OA\Parameter(name="deleted", description="Delete type, Not Deleted=0, Soft=1, Hard=9", example="0", required=false, in="query", @OA\Schema(type="integer")),
      *     description="",
      *     security={{"bearer":{}}},
      *     @OA\Response(response=200,description="Get courses list as array"),
@@ -33,7 +36,10 @@ class CoursesController extends BaseController
     public function index(): JsonResponse
     {
         try {
-            $courses = $this->courseService->getPaginatedData();
+            $courses = $this->courseService->getPaginatedData(
+                null,
+                ['deleted' => request()->deleted ?? DeleteStatus::NOT_DELETED]
+            );
             $status = Response::HTTP_OK;
             $total = $courses['total'] ?? 0;
             $message = 'Total ' . $total . ' ' . Str::plural('courses', $total) . ' found.';
@@ -139,13 +145,17 @@ class CoursesController extends BaseController
      *     )
      * )
      */
-    public function destroy(int $id): JsonResponse
+    public function destroy(int $id, Request $request): JsonResponse
     {
         try {
+            $deleteStatusInt = (int)$request->deleted ?? DeleteStatus::SOFT_DELETE;
             return $this->responseJson(
-                $this->courseService->delete($id),
+                $this->courseService->delete(
+                    $id,
+                    $deleteStatusInt
+                ),
                 Response::HTTP_OK,
-                __('Course deleted successfully.')
+                __('Course deleted state successfully update.')
             );
         } catch (Exception $exception) {
             return $this->responseErrorJson($exception);

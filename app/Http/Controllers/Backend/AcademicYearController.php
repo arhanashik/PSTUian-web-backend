@@ -73,7 +73,7 @@ class AcademicYearController extends BaseController
             return $this->responseJson(
                 $this->academicyearservice->create(($request->all())),
                 Response::HTTP_CREATED,
-                __('Student saved successfully.')
+                __('Academic Year saved successfully.')
             );
         } catch (Exception $exception) {
             return $this->responseErrorJson($exception);

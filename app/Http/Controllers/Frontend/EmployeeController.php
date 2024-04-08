@@ -24,6 +24,7 @@ class EmployeeController extends BaseController
      *     tags={"Frontend-employees"},
      *     summary="Get Employee List as Array",
      *     description="Get Employee List as Array",
+     *     @OA\Parameter(name="deleted", description="Delete type, Not Deleted=0, Soft=1, Hard=9", example="0", required=false, in="query", @OA\Schema(type="integer")),
      *     security={{"bearer":{}}},
      *     @OA\Response(response=200,description="Get Employee List as Array"),
      *     @OA\Response(response=400, description="Bad request"),
@@ -35,7 +36,7 @@ class EmployeeController extends BaseController
         try {
             $employees = $this->employeeService->getPaginatedData(
                 null,
-                ['deleted' => DeleteStatus::NOT_DELETED]
+                ['deleted' => request()->deleted ?? DeleteStatus::NOT_DELETED]
             );
             $total = $employees['total'] ?? 0;
             $message = 'Total ' . $total . ' ' . Str::plural('employee', $total) . ' found.';

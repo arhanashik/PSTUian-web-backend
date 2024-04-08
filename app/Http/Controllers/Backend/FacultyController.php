@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Backend;
 
 use Exception;
 use Illuminate\Support\Str;
+use App\Enum\DeleteStatus;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\FacultyRequest;
 use App\Services\FacultyService;
@@ -24,6 +25,7 @@ class FacultyController extends BaseController
      *     tags={"Faculties"},
      *     summary="Get Faculty List as Array",
      *     description="Get Faculty List as Array",
+     *     @OA\Parameter(name="deleted", description="Delete type, Not Deleted=0, Soft=1, Hard=9", example="0", required=false, in="query", @OA\Schema(type="integer")),
      *     security={{"bearer":{}}},
      *     @OA\Response(response=200,description="Get Faculty List as Array"),
      *     @OA\Response(response=400, description="Bad request"),
@@ -33,7 +35,10 @@ class FacultyController extends BaseController
     public function index(): JsonResponse
     {
         try {
-            $faculties = $this->facultyService->getPaginatedFaculties();
+            $faculties = $this->facultyService->getPaginatedFaculties(
+                null,
+                ['deleted' => request()->deleted ?? DeleteStatus::NOT_DELETED]
+            );
             $total = $faculties['total'] ?? 0;
             $message = 'Total ' . $total . ' ' . Str::plural('faculty', $total) . ' found.';
 

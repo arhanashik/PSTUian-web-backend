@@ -23,18 +23,14 @@ class AcademicYearRequest extends FormRequest
      */
     public function rules(): array
     {
-        $AcademicYearId = $this->route('academicyear');
-
         $rules = [
-            'name' => ['required', 'string', 'max:255'],
+            'name' => [
+                'required', 
+                'string', 
+                'max:255',
+                Rule::unique('academic_years')->ignore($this->academic_year),
+            ],
         ];
-
-        if ($this->isMethod('PUT') || $this->isMethod('PATCH')) {
-            $rules['name'][] = Rule::unique('academic_years')->ignore($AcademicYearId);
-        } else {
-            $rules['name'][] = 'unique:academic_years,name';
-        }
-
         return $rules;
     }
 }
