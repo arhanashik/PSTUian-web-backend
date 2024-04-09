@@ -26,15 +26,13 @@ class StudentRequest extends FormRequest
         $rules = [
             's_id' => [
                 'required',
-                'integer',
+                'numeric',
                 Rule::unique('students')->ignore($this->student),
             ],
             'name' => [
                 'required',
                 'string',
                 'max:50',
-                'alpha',
-                'regex:/^[a-zA-Z]+$/'
             ],
             'email' => [
                 'required',
@@ -46,7 +44,7 @@ class StudentRequest extends FormRequest
             ],
             'reg' => [
                 'required',
-                'integer',
+                'numeric',
                 Rule::unique('students')->ignore($this->student),
             ],
             'faculty_id' => [
@@ -55,7 +53,7 @@ class StudentRequest extends FormRequest
             'batch_id' => [
                 'required'
             ],
-            'session_id' => [
+            'academicyear_id' => [
                 'required'
             ],
         ];
