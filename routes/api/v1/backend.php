@@ -30,6 +30,7 @@ Route::apiResource('courses', CoursesController::class)->only(['index', 'store',
 // Students
 Route::apiResource('students', StudentController::class)->only(['index', 'store', 'update', 'destroy']);
 Route::get('/students/all', [StudentController::class, 'all'])->name('students.all');
+Route::get('/students/{id}', [StudentController::class, 'show'])->name('students.show');
 
 // Employees
 Route::apiResource('employees', EmployeeController::class);
