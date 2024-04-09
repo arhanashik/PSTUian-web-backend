@@ -19,13 +19,17 @@ return new class extends Migration
             $table->unsignedBigInteger('faculty_id');
             $table->string('name');
             $table->string('title')->nullable();
-            $table->string('session', 20);
+            $table->unsignedBigInteger('academicyear_id');
             $table->unsignedInteger('total_student')->default(0);
             $table->unsignedTinyInteger('deleted')->default(DeleteStatus::NOT_DELETED);
             $table->timestamps();
             $table->foreign('faculty_id')
                 ->references('id')
                 ->on('faculties')
+                ->onDelete('cascade');
+            $table->foreign('academicyear_id')
+                ->references('id')
+                ->on('academic_years')
                 ->onDelete('cascade');
         });
     }

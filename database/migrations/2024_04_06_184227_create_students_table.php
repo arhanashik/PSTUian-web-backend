@@ -15,22 +15,22 @@ return new class extends Migration {
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
-            $table->string('s_id', 20)->unique();
-            $table->string('name', 50);
+            $table->integer('s_id')->unique();
             $table->integer('reg')->unique();
-            $table->string('phone', 20)->nullable();
-            $table->string('linked_in', 100)->nullable()->unique();;
-            $table->string('blood', 5)->nullable();
-            $table->string('address', 200)->nullable();
-            $table->string('email', 100)->nullable()->unique();
-            $table->unsignedBigInteger('batch_id');
             $table->unsignedBigInteger('academicyear_id');
             $table->unsignedBigInteger('faculty_id');
-            $table->string('fb_link', 100)->nullable()->unique();
+            $table->unsignedBigInteger('batch_id');
+            $table->string('email', 100)->nullable()->unique();
+            $table->string('password');
+            $table->string('name', 50);
+            $table->string('phone', 20)->nullable();
+            $table->string('blood', 5)->nullable();
+            $table->string('address', 200)->nullable();
             $table->string('image_url', 100)->nullable();
             $table->string('cv_link', 100)->nullable();
-            $table->string('password');
             $table->text('bio')->nullable();
+            $table->string('linkedin', 100)->nullable()->unique();
+            $table->string('facebook', 100)->nullable()->unique();
             $table->unsignedTinyInteger('deleted')->default(DeleteStatus::NOT_DELETED);
             $table->foreign('faculty_id')
                 ->references('id')

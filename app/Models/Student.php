@@ -21,7 +21,7 @@ class Student extends Model
         'address',
         'email',
         'batch_id',
-        'session_id',
+        'academicyear_id',
         'faculty_id',
         'fb_link',
         'image_url',
