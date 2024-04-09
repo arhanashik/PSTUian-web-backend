@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Backend;
 
+use Illuminate\Http\Request;
 use App\Http\Requests\StudentRequest;
 use App\Services\StudentService;
 use Exception;
@@ -195,6 +196,55 @@ class StudentController extends BaseController
                 $this->studentService->update($id, $request->all()),
                 Response::HTTP_OK,
                 __('Student updated successfully.')
+            );
+        } catch (Exception $exception) {
+            return $this->responseErrorJson($exception);
+        }
+    }
+
+    /**
+     * @OA\Delete(
+     *      path="/api/v1/backend/students/{id}",
+     *      tags={"Students"},
+     *      summary="Delete a student",
+     *      description="Delete a student by ID",
+     *      @OA\Parameter(
+     *          name="id",
+     *          in="path",
+     *          required=true,
+     *          description="ID of the student to delete",
+     *          @OA\Schema(
+     *              type="integer",
+     *              format="int64"
+     *          )
+     *      ),
+     *      @OA\Parameter(name="deleted", description="Delete type, Soft=1, Hard=9, Keep empty for permanent delete", example="1", required=false, in="query", @OA\Schema(type="integer")),
+     *      @OA\Response(
+     *          response=200,
+     *          description="student deleted successful",
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="student not found"
+     *      ),
+     *      @OA\Response(
+     *          response=500,
+     *          description="Internal server error"
+     *      )
+     * )
+     */
+    public function destroy(int $id, Request $request): JsonResponse
+    {
+        try {
+            $deleteStatusInt = (int) $request->deleted ?? DeleteStatus::SOFT_DELETE;
+
+            return $this->responseJson(
+                $this->studentService->delete(
+                    $id,
+                    $deleteStatusInt
+                ),
+                Response::HTTP_OK,
+                __('student deleted state successfully update.')
             );
         } catch (Exception $exception) {
             return $this->responseErrorJson($exception);
