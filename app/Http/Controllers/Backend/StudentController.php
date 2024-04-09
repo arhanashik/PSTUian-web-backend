@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Backend;
 
+use App\Http\Requests\StudentRequest;
 use App\Services\StudentService;
 use Exception;
 use App\Enum\DeleteStatus;
@@ -11,6 +12,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\BaseController;
 use Symfony\Component\HttpFoundation\Response;
+
 class StudentController extends BaseController
 {
     public function __construct(private readonly StudentService $studentService)
@@ -64,6 +66,34 @@ class StudentController extends BaseController
             $total = count($courses) ?? 0;
             $message = 'Total ' . $total . ' ' . Str::plural('students', $total) . ' found.';
             return $this->responseJson($courses, $status, $message);
+        } catch (Exception $exception) {
+            return $this->responseErrorJson($exception);
+        }
+    }
+
+
+    /**
+     * @OA\GET(
+     *     path="/api/v1/backend/students/{id}",
+     *     tags={"Students"},
+     *     summary="Get a Student",
+     *     description="Get a Student",
+     *     @OA\Parameter(name="id", description="id, eg; 1", required=true, in="path", @OA\Schema(type="integer")),
+     *     security={{"bearer":{}}},
+     *     @OA\Response(response=200,description="Get a Student"),
+     *     @OA\Response(response=400, description="Bad request"),
+     *     @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
+    public function show(int $id): JsonResponse
+    {
+        try {
+            $employee = $this->studentService->getById($id);
+            return $this->responseJson(
+                $employee,
+                Response::HTTP_OK,
+                __('Student found')
+            );
         } catch (Exception $exception) {
             return $this->responseErrorJson($exception);
         }
