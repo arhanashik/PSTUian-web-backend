@@ -114,12 +114,12 @@ class StudentController extends BaseController
      *         @OA\MediaType(
      *             mediaType="application/json",
      *             @OA\Schema(
-     *                 required={"s_id", "reg", "academicyear_id", "faculty_id", "batch_id", "email", "password", "name", "phone", "blood", "address", "image_url", "cv_link", "bio", "linkedin", "facebook"},
+     *                 required={"s_id", "reg", "academicyear_id", "faculty_id", "batche_id", "email", "password", "name", "phone", "blood", "address", "image_url", "cv_link", "bio", "linkedin", "facebook"},
      *                 @OA\Property(property="s_id", type="string", example="1802043", description="Student ID"),
      *                 @OA\Property(property="reg", type="string", example="08453", description="Student reg no"),
      *                 @OA\Property(property="academicyear_id", type="integer", example=1, description="Academic session id"),
      *                 @OA\Property(property="faculty_id", type="integer", example=1, description="Faculty ID"),
-     *                 @OA\Property(property="batch_id", type="integer", example=1, description="Batch ID"),
+     *                 @OA\Property(property="batche_id", type="integer", example=1, description="Batch ID"),
      *                 @OA\Property(property="email", type="string", example="shishir.cse.pstu@gmail.com", description="Student email address"),
      *                 @OA\Property(property="password", type="string", example="password", description="Account password"),
      *                 @OA\Property(property="name", type="string", example="John Doe", description="Name of the student"),
@@ -166,12 +166,12 @@ class StudentController extends BaseController
      *         @OA\MediaType(
      *             mediaType="application/json",
      *             @OA\Schema(
-     *                 required={"s_id", "reg", "academicyear_id", "faculty_id", "batch_id", "email", "password", "name", "phone", "blood", "address", "image_url", "cv_link", "bio", "linkedin", "facebook"},
+     *                 required={"s_id", "reg", "academicyear_id", "faculty_id", "batche_id", "email", "password", "name", "phone", "blood", "address", "image_url", "cv_link", "bio", "linkedin", "facebook"},
      *                 @OA\Property(property="s_id", type="string", example="1802043", description="Student ID"),
      *                 @OA\Property(property="reg", type="string", example="08453", description="Student reg no"),
      *                 @OA\Property(property="academicyear_id", type="integer", example=1, description="Academic session id"),
      *                 @OA\Property(property="faculty_id", type="integer", example=1, description="Faculty ID"),
-     *                 @OA\Property(property="batch_id", type="integer", example=1, description="Batch ID"),
+     *                 @OA\Property(property="batche_id", type="integer", example=1, description="Batch ID"),
      *                 @OA\Property(property="email", type="string", example="shishir.cse.pstu@gmail.com", description="Student email address"),
      *                 @OA\Property(property="password", type="string", example="password", description="Account password"),
      *                 @OA\Property(property="name", type="string", example="John Doe", description="Name of the student"),
@@ -251,6 +251,33 @@ class StudentController extends BaseController
             );
         } catch (Exception $exception) {
             return $this->responseErrorJson($exception);
+        }
+    }
+
+    public function patch(StudentRequest $request, int $id)
+    {
+        $user = $this->studentService->getById($id);
+
+        if (!$user) {
+            return response()->json(['message' => 'User not found'], 404);
+        }
+
+        $fieldsToUpdate = $request->all();
+
+        if (!empty($fieldsToUpdate)) {
+            foreach ($fieldsToUpdate as $field => $value) {
+                if (!in_array($field, $user->getFillable())) {
+                    return response()->json(['message' => "Field '$field' is not fillable in the Employee model"], 422);
+                }
+            }
+            return $this->responseJson(
+                $this->studentService->update($id, $fieldsToUpdate),
+                Response::HTTP_OK,
+                __('Student updated successfully.')
+            );
+
+        } else {
+            return response()->json(['message' => 'At least one field is required for update'], 422);
         }
     }
 }

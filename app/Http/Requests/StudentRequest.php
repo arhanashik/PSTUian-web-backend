@@ -50,7 +50,7 @@ class StudentRequest extends FormRequest
             'faculty_id' => [
                 'required'
             ],
-            'batch_id' => [
+            'batche_id' => [
                 'required'
             ],
             'academicyear_id' => [
@@ -58,7 +58,14 @@ class StudentRequest extends FormRequest
             ],
         ];
 
+
+        if ($this->isMethod('patch')) {
+            foreach ($rules as $field => &$fieldRules) {
+                $fieldRules[] = 'sometimes';
+            }
+        }
+
         return $rules;
     }
-    
+
 }

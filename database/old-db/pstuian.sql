@@ -250,7 +250,7 @@ CREATE TABLE `student` (
   `blood` varchar(255) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `batch_id` int(11) NOT NULL,
+  `batche_id` int(11) NOT NULL,
   `session` varchar(255) NOT NULL,
   `faculty_id` int(11) NOT NULL,
   `fb_link` varchar(255) DEFAULT NULL,
