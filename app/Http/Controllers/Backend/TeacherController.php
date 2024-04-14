@@ -6,6 +6,8 @@ namespace App\Http\Controllers\Backend;
 
 
 use App\Enum\DeleteStatus;
+use App\Utilities\DeleteMessage;
+use Illuminate\Http\Request;
 use App\Http\Requests\TeacherRequest;
 use App\Services\TeacherService;
 use Exception;
@@ -205,4 +207,53 @@ class TeacherController extends BaseController
         }
     }
 
+    /**
+     * @OA\Delete(
+     *      path="/api/v1/backend/teachers/{id}",
+     *      tags={"Teachers"},
+     *      summary="Delete a Teacher",
+     *      description="Delete a Teacher by ID",
+     *      @OA\Parameter(
+     *          name="id",
+     *          in="path",
+     *          required=true,
+     *          description="ID of the Teacher to delete",
+     *          @OA\Schema(
+     *              type="integer",
+     *              format="int64"
+     *          )
+     *      ),
+     *      @OA\Parameter(name="deleted", description="Delete type, Soft=1, Hard=9, Keep empty for permanent delete", example="1", required=false, in="query", @OA\Schema(type="integer")),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Teacher deleted successful",
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Teacher not found"
+     *      ),
+     *      @OA\Response(
+     *          response=500,
+     *          description="Internal server error"
+     *      )
+     * )
+     */
+    public function destroy(int $id, Request $request): JsonResponse
+    {
+        try {
+            $deleteStatusInt = (int) $request->deleted ?? DeleteStatus::SOFT_DELETE;
+            $deleteMessage = new DeleteMessage($deleteStatusInt, 'Teacher');
+
+            return $this->responseJson(
+                $this->teacherService->delete(
+                    $id,
+                    $deleteStatusInt
+                ),
+                Response::HTTP_OK,
+                __($deleteMessage->format())
+            );
+        } catch (Exception $exception) {
+            return $this->responseErrorJson($exception);
+        }
+    }
 }
