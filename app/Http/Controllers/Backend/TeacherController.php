@@ -75,4 +75,31 @@ class  TeacherController extends BaseController
         }
     }
 
+        /**
+     * @OA\GET(
+     *     path="/api/v1/backend/teachers/{id}",
+     *     tags={"Teachers"},
+     *     summary="Get a Student",
+     *     description="Get a Student",
+     *     @OA\Parameter(name="id", description="id, eg; 1", required=true, in="path", @OA\Schema(type="integer")),
+     *     security={{"bearer":{}}},
+     *     @OA\Response(response=200,description="Get a Student"),
+     *     @OA\Response(response=400, description="Bad request"),
+     *     @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
+    public function show(int $id): JsonResponse
+    {
+        try {
+            $employee = $this->teacherService->getById($id);
+            return $this->responseJson(
+                $employee,
+                Response::HTTP_OK,
+                __('Teacher found')
+            );
+        } catch (Exception $exception) {
+            return $this->responseErrorJson($exception);
+        }
+    }
+
 }
