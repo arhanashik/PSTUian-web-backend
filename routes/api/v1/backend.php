@@ -28,9 +28,9 @@ Route::apiResource('faculties', FacultyController::class)->only(['index', 'store
 Route::apiResource('courses', CoursesController::class)->only(['index', 'store', 'update', 'destroy']);
 
 // Students
-Route::apiResource('students', StudentController::class)->only(['index', 'store', 'update', 'destroy']);
 Route::get('/students/all', [StudentController::class, 'all'])->name('students.all');
-Route::get('/students/{id}', [StudentController::class, 'show'])->name('students.show');
+Route::apiResource('students', StudentController::class)->only(['index', 'store', 'update', 'destroy', 'show']);
+
 
 // Employees
 Route::apiResource('employees', EmployeeController::class);

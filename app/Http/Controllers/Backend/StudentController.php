@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Backend;
 
+
+use App\Utilities\DeleteMessage;
 use Illuminate\Http\Request;
 use App\Http\Requests\StudentRequest;
 use App\Services\StudentService;
@@ -237,6 +239,7 @@ class StudentController extends BaseController
     {
         try {
             $deleteStatusInt = (int) $request->deleted ?? DeleteStatus::SOFT_DELETE;
+            $deleteMessage = new DeleteMessage($deleteStatusInt, 'Student');
 
             return $this->responseJson(
                 $this->studentService->delete(
@@ -244,7 +247,7 @@ class StudentController extends BaseController
                     $deleteStatusInt
                 ),
                 Response::HTTP_OK,
-                __('student deleted state successfully update.')
+                __($deleteMessage->format())
             );
         } catch (Exception $exception) {
             return $this->responseErrorJson($exception);

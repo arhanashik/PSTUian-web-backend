@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->integer('reg')->unique();
             $table->unsignedBigInteger('academicyear_id');
             $table->unsignedBigInteger('faculty_id');
-            $table->unsignedBigInteger('batch_id');
+            $table->unsignedBigInteger('batche_id');
             $table->string('email', 100)->nullable()->unique();
             $table->string('password');
             $table->string('name', 50);
@@ -36,7 +36,7 @@ return new class extends Migration {
                 ->references('id')
                 ->on('faculties')
                 ->onDelete('cascade');
-            $table->foreign('batch_id')
+            $table->foreign('batche_id')
                 ->references('id')
                 ->on('batches')
                 ->onDelete('cascade');
