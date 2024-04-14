@@ -29,6 +29,11 @@ class StudentRequest extends FormRequest
                 'numeric',
                 Rule::unique('students')->ignore($this->student),
             ],
+            'reg' => [
+                'required',
+                'numeric',
+                Rule::unique('students')->ignore($this->student),
+            ],
             'name' => [
                 'required',
                 'string',
@@ -42,11 +47,7 @@ class StudentRequest extends FormRequest
                 'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',
                 Rule::unique('students')->ignore($this->student),
             ],
-            'reg' => [
-                'required',
-                'numeric',
-                Rule::unique('students')->ignore($this->student),
-            ],
+            'phone' => 'nullable|string|regex:/^[0-9]{10,20}$/',
             'faculty_id' => [
                 'required'
             ],
@@ -55,6 +56,12 @@ class StudentRequest extends FormRequest
             ],
             'academicyear_id' => [
                 'required'
+            ],
+            'linkedin' => [
+                Rule::unique('students')->ignore($this->student),
+            ],
+            'facebook' => [
+                Rule::unique('students')->ignore($this->student),
             ],
         ];
 
