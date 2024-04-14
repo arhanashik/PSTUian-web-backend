@@ -26,15 +26,18 @@ class StudentRequest extends FormRequest
         $rules = [
             's_id' => [
                 'required',
-                'integer',
+                'numeric',
+                Rule::unique('students')->ignore($this->student),
+            ],
+            'reg' => [
+                'required',
+                'numeric',
                 Rule::unique('students')->ignore($this->student),
             ],
             'name' => [
                 'required',
                 'string',
                 'max:50',
-                'alpha',
-                'regex:/^[a-zA-Z]+$/'
             ],
             'email' => [
                 'required',
@@ -44,23 +47,32 @@ class StudentRequest extends FormRequest
                 'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',
                 Rule::unique('students')->ignore($this->student),
             ],
-            'reg' => [
-                'required',
-                'integer',
-                Rule::unique('students')->ignore($this->student),
-            ],
+            'phone' => 'nullable|string|regex:/^[0-9]{10,20}$/',
             'faculty_id' => [
                 'required'
             ],
-            'batch_id' => [
+            'batche_id' => [
                 'required'
             ],
-            'session_id' => [
+            'academicyear_id' => [
                 'required'
+            ],
+            'linkedin' => [
+                Rule::unique('students')->ignore($this->student),
+            ],
+            'facebook' => [
+                Rule::unique('students')->ignore($this->student),
             ],
         ];
 
+
+        if ($this->isMethod('patch')) {
+            foreach ($rules as $field => &$fieldRules) {
+                $fieldRules[] = 'sometimes';
+            }
+        }
+
         return $rules;
     }
-    
+
 }

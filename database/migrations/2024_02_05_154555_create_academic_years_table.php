@@ -15,7 +15,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('academic_years', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('name', 255);
             $table->unsignedTinyInteger('deleted')->default(DeleteStatus::NOT_DELETED);
             $table->timestamps();
