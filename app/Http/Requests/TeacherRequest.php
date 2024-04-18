@@ -54,7 +54,7 @@ class TeacherRequest extends FormRequest
                 'required'
             ],
             'phone' => 'nullable|string|regex:/^[0-9]{10,20}$/',
-            'website' => 'nullable|url',
+            'website' => 'nullable',
             'linkedin' => [
                 Rule::unique('teachers')->ignore($this->teacher),
             ],
@@ -63,9 +63,11 @@ class TeacherRequest extends FormRequest
             ],
         ];
 
-
         if ($this->isMethod('patch')) {
             foreach ($rules as $field => &$fieldRules) {
+                if (!is_array($fieldRules)) {
+                    $fieldRules = (array) $fieldRules;
+                }
                 $fieldRules[] = 'sometimes';
             }
         }

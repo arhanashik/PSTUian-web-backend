@@ -35,7 +35,8 @@ Route::apiResource('students', StudentController::class)->only(['index', 'store'
 
 
 // Teachers
-Route::get('/teachers/all', [StudentController::class, 'all'])->name('teachers.all');
+Route::patch('/teachers/{id}', [TeacherController::class, 'patch']);
+Route::get('/teachers/all', [TeacherController::class, 'all'])->name('teachers.all');
 Route::apiResource('teachers', TeacherController::class)->only(['index', 'store', 'show', 'update', 'destroy']);
 
 // Employees
