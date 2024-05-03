@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\DonationsController;
 use App\Http\Controllers\Backend\EmployeeController;
 use App\Http\Controllers\Backend\FacultyController;
 use App\Http\Controllers\Backend\StudentController;
+use App\Http\Controllers\Backend\TeacherController;
 use Illuminate\Support\Facades\Route;
 
 // Donations
@@ -31,6 +32,12 @@ Route::apiResource('courses', CoursesController::class)->only(['index', 'store',
 Route::patch('/students/{id}', [StudentController::class, 'patch']);
 Route::get('/students/all', [StudentController::class, 'all'])->name('students.all');
 Route::apiResource('students', StudentController::class)->only(['index', 'store', 'update', 'destroy', 'show']);
+
+
+// Teachers
+Route::patch('/teachers/{id}', [TeacherController::class, 'patch']);
+Route::get('/teachers/all', [TeacherController::class, 'all'])->name('teachers.all');
+Route::apiResource('teachers', TeacherController::class)->only(['index', 'store', 'show', 'update', 'destroy']);
 
 // Employees
 Route::apiResource('employees', EmployeeController::class);
