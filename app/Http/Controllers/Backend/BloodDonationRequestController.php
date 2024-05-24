@@ -155,7 +155,6 @@ class BloodDonationRequestController extends BaseController
     }
 
 
-    
     /**
      * @OA\Delete(
      *      path="/api/v1/backend/bloodrequests/{id}",
@@ -200,6 +199,37 @@ class BloodDonationRequestController extends BaseController
                 ),
                 Response::HTTP_OK,
                 __($deleteMessage->format())
+            );
+        } catch (Exception $exception) {
+            return $this->responseErrorJson($exception);
+        }
+    }
+
+        /**
+     * @OA\GET(
+     *     path="/api/v1/backend/bloodrequests/confirm/{id}",
+     *     tags={"Blood Requests Backend"},
+     *     summary="Get blood request",
+     *     description="Get blood request",
+     *     @OA\Parameter(name="id", description="id, eg; 1", required=true, in="path", @OA\Schema(type="integer")),
+     *     security={{"bearer":{}}},
+     *     @OA\Response(response=200,description="Get a blood request"),
+     *     @OA\Response(response=400, description="Bad request"),
+     *     @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
+    public function ChangeConfirmation(int $id)
+    {
+        // $isconfirm = $this->bloodRequestService->getById($id)->isConfirm === 0 ? 1 : 0 ;
+        // return $isconfirm;
+        try {
+            $confirmation = $this->bloodRequestService->getById($id)->isConfirm === 0 ? 1 : 0 ;
+            $object = $this->bloodRequestService->update($id,['isConfirm'=> (int)$confirmation]);
+            
+            return $this->responseJson(
+                $object,
+                Response::HTTP_OK,
+                $confirmation ===  1 ? __('Blood donation request is confirma ') : __('Blood donation request is unconfirm ')
             );
         } catch (Exception $exception) {
             return $this->responseErrorJson($exception);

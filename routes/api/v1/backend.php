@@ -48,3 +48,4 @@ Route::apiResource('academicyears', AcademicYearController::class)->only(['index
 
 // Blood donation request
 Route::apiResource('bloodrequests', BloodDonationRequestController::class)->only(['index','show', 'store', 'update', 'destroy']);
+Route::GET('bloodrequests/confirm/{id}', [BloodDonationRequestController::class, 'ChangeConfirmation']);

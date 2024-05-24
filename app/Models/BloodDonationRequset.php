@@ -13,6 +13,7 @@ class BloodDonationRequset extends Model
     protected $fillable = [
         'blood_group',
         'need_before',
+        'isConfirm',
         'phone',
         'message',
         'deleted',
