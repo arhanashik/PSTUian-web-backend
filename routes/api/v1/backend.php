@@ -3,6 +3,7 @@
 use App\Http\Controllers\Backend\AcademicYearController;
 use App\Http\Controllers\Backend\AccountOptionController;
 use App\Http\Controllers\Backend\BatchController;
+use App\Http\Controllers\Backend\BloodDonationController;
 use App\Http\Controllers\Backend\BloodDonationRequestController;
 use App\Http\Controllers\Backend\CoursesController;
 use App\Http\Controllers\Backend\DonationsController;
@@ -49,3 +50,7 @@ Route::apiResource('academicyears', AcademicYearController::class)->only(['index
 // Blood donation request
 Route::apiResource('bloodrequests', BloodDonationRequestController::class)->only(['index','show', 'store', 'update', 'destroy']);
 Route::GET('bloodrequests/confirm/{id}', [BloodDonationRequestController::class, 'ChangeConfirmation']);
+
+// Blood donation
+Route::apiResource('blooddonations', BloodDonationController::class)->only(['index','show', 'store','destroy']);
+
