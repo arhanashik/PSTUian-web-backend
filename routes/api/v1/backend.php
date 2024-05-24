@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\EmployeeController;
 use App\Http\Controllers\Backend\FacultyController;
 use App\Http\Controllers\Backend\StudentController;
 use App\Http\Controllers\Backend\TeacherController;
+use App\Http\Controllers\BloodDonationRequestController;
 use Illuminate\Support\Facades\Route;
 
 // Donations
@@ -44,3 +45,6 @@ Route::apiResource('employees', EmployeeController::class);
 
 // AcademicYear
 Route::apiResource('academicyears', AcademicYearController::class)->only(['index', 'store', 'update', 'destroy']);
+
+// Blood donation request
+Route::apiResource('boodrequests', BloodDonationRequestController::class)->only(['index', 'store', 'destroy']);
