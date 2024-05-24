@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Backend;
 
 use App\Enum\DeleteStatus;
+use App\Http\Requests\RequestBloodDonationRequest;
 use App\Services\BloodRequestService;
 use Illuminate\Http\Request;
 use Exception;
@@ -71,6 +72,41 @@ class BloodDonationRequestController extends BaseController
                 $bloodRequest,
                 Response::HTTP_OK,
                 __('Blood request found')
+            );
+        } catch (Exception $exception) {
+            return $this->responseErrorJson($exception);
+        }
+    }
+
+    /**
+     * @OA\POST(
+     *     path="/api/v1/backend/bloodrequests",
+     *     tags={"Blood Requests Backend"},
+     *     summary="Add blood donation request",
+     *     description="",
+     *     security={{"bearer":{}}},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"blood_group", "need_befor", "phone", "message"},
+     *             @OA\Property(property="blood_group", type="string", example="B+"),
+     *             @OA\Property(property="need_before", type="date", example="2024-05-25"),
+     *             @OA\Property(property="phone", type="number", example="01403487219"),
+     *             @OA\Property(property="message", type="text", example="Blood need for a pragnenet patient"),
+     *        ),
+     *    ),
+     *    @OA\Response(response=201,description="Blood donation request created successfully"),
+     *    @OA\Response(response=400, description="Bad request"),
+     *    @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
+    public function store(RequestBloodDonationRequest $request): JsonResponse
+    {
+        try {
+            return $this->responseJson(
+                $this->bloodRequestService->create($request->all()),
+                Response::HTTP_CREATED,
+                __('Blood donation request created successfully.')
             );
         } catch (Exception $exception) {
             return $this->responseErrorJson($exception);
