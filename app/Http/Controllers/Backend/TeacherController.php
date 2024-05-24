@@ -25,7 +25,7 @@ class TeacherController extends BaseController
     /**
      * @OA\GET(
      *     path="/api/v1/backend/teachers",
-     *     tags={"Teachers"},
+     *     tags={"Teachers-Backend"},
      *     summary="Get Teachers list as array",
      *     description="",
      *     @OA\Parameter(name="deleted", description="Delete type, Not Deleted=0, Soft=1, Hard=9", example="0", required=false, in="query", @OA\Schema(type="integer")),
@@ -54,7 +54,7 @@ class TeacherController extends BaseController
     /**
      * @OA\GET(
      *     path="/api/v1/backend/teachers/all",
-     *     tags={"Teachers"},
+     *     tags={"Teachers-Backend"},
      *     summary="Get teachers list as array",
      *     description="",
      *     security={{"bearer":{}}},
@@ -81,7 +81,7 @@ class TeacherController extends BaseController
     /**
      * @OA\GET(
      *     path="/api/v1/backend/teachers/{id}",
-     *     tags={"Teachers"},
+     *     tags={"Teachers-Backend"},
      *     summary="Get a Teacher",
      *     description="Get a Teacher",
      *     @OA\Parameter(name="id", description="id, eg; 1", required=true, in="path", @OA\Schema(type="integer")),
@@ -108,7 +108,7 @@ class TeacherController extends BaseController
     /**
      * @OA\Post(
      *     path="/api/v1/backend/teachers",
-     *     tags={"Teachers"},
+     *     tags={"Teachers-Backend"},
      *     summary="Insert new Teachers",
      *     description="Implement an API endpoint for administrators to effortlessly add new Teachers entries.",
      *     security={{"bearerAuth":{}}},
@@ -158,7 +158,7 @@ class TeacherController extends BaseController
     /**
      * @OA\PUT(
      *     path="/api/v1/backend/teachers/{id}",
-     *     tags={"Teachers"},
+     *     tags={"Teachers-Backend"},
      *     summary="Update teacher",
      *     description="Teacher update api",
      *     @OA\Parameter(name="id", description="id, eg; 1", required=true, in="path", @OA\Schema(type="integer")),
@@ -210,7 +210,7 @@ class TeacherController extends BaseController
     /**
      * @OA\Delete(
      *      path="/api/v1/backend/teachers/{id}",
-     *      tags={"Teachers"},
+     *      tags={"Teachers-Backend"},
      *      summary="Delete a Teacher",
      *      description="Delete a Teacher by ID",
      *      @OA\Parameter(
@@ -260,7 +260,7 @@ class TeacherController extends BaseController
     /**
      * @OA\PATCH(
      *     path="/api/v1/backend/teachers/{id}",
-     *     tags={"Teachers"},
+     *     tags={"Teachers-Backend"},
      *     summary="Update teacher",
      *     description="Teacher update api",
      *     @OA\Parameter(name="id", description="id, eg; 1", required=true, in="path", @OA\Schema(type="integer")),

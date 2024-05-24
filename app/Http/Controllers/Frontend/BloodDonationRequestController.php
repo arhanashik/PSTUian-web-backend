@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\Backend;
+namespace App\Http\Controllers\Frontend;
 
 use App\Enum\DeleteStatus;
 use App\Http\Requests\RequestBloodDonationRequest;
@@ -10,7 +10,6 @@ use App\Services\BloodRequestService;
 use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Support\Str;
-use App\Services\CourseService;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\BaseController;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,8 +23,8 @@ class BloodDonationRequestController extends BaseController
 
     /**
      * @OA\GET(
-     *     path="/api/v1/backend/bloodrequests",
-     *     tags={"Blood-Requests-Backend"},
+     *     path="/api/v1/frontend/bloodrequests",
+     *     tags={"Blood-Requests-Frontend"},
      *     summary="Get blood requests list as array",
      *     @OA\Parameter(name="deleted", description="Delete type, Not Deleted=0, Soft=1, Hard=9", example="0", required=false, in="query", @OA\Schema(type="integer")),
      *     description="",
@@ -54,8 +53,8 @@ class BloodDonationRequestController extends BaseController
 
     /**
      * @OA\GET(
-     *     path="/api/v1/backend/bloodrequests/{id}",
-     *     tags={"Blood-Requests-Backend"},
+     *     path="/api/v1/frontend/bloodrequests/{id}",
+     *     tags={"Blood-Requests-Frontend"},
      *     summary="Get blood request",
      *     description="Get blood request",
      *     @OA\Parameter(name="id", description="id, eg; 1", required=true, in="path", @OA\Schema(type="integer")),
@@ -81,8 +80,8 @@ class BloodDonationRequestController extends BaseController
 
     /**
      * @OA\POST(
-     *     path="/api/v1/backend/bloodrequests",
-     *     tags={"Blood-Requests-Backend"},
+     *     path="/api/v1/frontend/bloodrequests",
+     *     tags={"Blood-Requests-Frontend"},
      *     summary="Add blood donation request",
      *     description="",
      *     security={{"bearer":{}}},
@@ -116,8 +115,8 @@ class BloodDonationRequestController extends BaseController
 
     /**
      * @OA\PUT(
-     *     path="/api/v1/backend/bloodrequests/{id}",
-     *     tags={"Blood-Requests-Backend"},
+     *     path="/api/v1/frontend/bloodrequests/{id}",
+     *     tags={"Blood-Requests-Frontend"},
      *     summary="Update Blood donation request",
      *     description="Update Blood donation request api",
      *     @OA\Parameter(name="id", description="id, eg; 1", required=true, in="path", @OA\Schema(type="integer")),
@@ -129,10 +128,10 @@ class BloodDonationRequestController extends BaseController
      *             mediaType="application/json",
      *             @OA\Schema(
      *                 required={"blood_group", "need_befor", "phone", "message"},
-    *                   @OA\Property(property="blood_group", type="string", example="B+"),
-    *                   @OA\Property(property="need_before", type="date", example="2024-05-25"),
-    *                   @OA\Property(property="phone", type="number", example="01403487219"),
-    *                   @OA\Property(property="message", type="text", example="Blood need for a pragnenet patient"),
+     *                   @OA\Property(property="blood_group", type="string", example="B+"),
+     *                   @OA\Property(property="need_before", type="date", example="2024-05-25"),
+     *                   @OA\Property(property="phone", type="number", example="01403487219"),
+     *                   @OA\Property(property="message", type="text", example="Blood need for a pragnenet patient"),
      *             )
      *         )
      *     ),
@@ -157,8 +156,8 @@ class BloodDonationRequestController extends BaseController
 
     /**
      * @OA\Delete(
-     *      path="/api/v1/backend/bloodrequests/{id}",
-     *      tags={"Blood-Requests-Backend"},
+     *      path="/api/v1/frontend/bloodrequests/{id}",
+     *      tags={"Blood-Requests-Frontend"},
      *      summary="Blood donation request",
      *      description="Blood donation request by ID",
      *      @OA\Parameter(
@@ -171,7 +170,7 @@ class BloodDonationRequestController extends BaseController
      *              format="int64"
      *          )
      *      ),
-     *      @OA\Parameter(name="deleted", description="Delete type, Soft=1, Hard=9, Keep empty for permanent delete", example="1", required=false, in="query", @OA\Schema(type="integer")),
+     *      @OA\Parameter(name="deleted", description="Delete type, permanent delete=10", example="10", required=false, in="query", @OA\Schema(type="integer")),
      *      @OA\Response(
      *          response=200,
      *          description="Blood donation request deleted successful",
@@ -186,10 +185,10 @@ class BloodDonationRequestController extends BaseController
      *      )
      * )
      */
-    public function destroy(int $id, Request $request): JsonResponse
+    public function destroy(int $id, Request $request)
     {
         try {
-            $deleteStatusInt = (int) $request->deleted ?? DeleteStatus::SOFT_DELETE;
+            $deleteStatusInt = (int) $request->deleted ?? DeleteStatus::PARMANENT_DELETE;
             $deleteMessage = new DeleteMessage($deleteStatusInt, 'Blood donation request');
 
             return $this->responseJson(
@@ -205,34 +204,4 @@ class BloodDonationRequestController extends BaseController
         }
     }
 
-        /**
-     * @OA\GET(
-     *     path="/api/v1/backend/bloodrequests/confirm/{id}",
-     *     tags={"Blood-Requests-Backend"},
-     *     summary="Get blood request",
-     *     description="Get blood request",
-     *     @OA\Parameter(name="id", description="id, eg; 1", required=true, in="path", @OA\Schema(type="integer")),
-     *     security={{"bearer":{}}},
-     *     @OA\Response(response=200,description="Get a blood request"),
-     *     @OA\Response(response=400, description="Bad request"),
-     *     @OA\Response(response=404, description="Resource Not Found"),
-     * )
-     */
-    public function ChangeConfirmation(int $id)
-    {
-        // $isconfirm = $this->bloodRequestService->getById($id)->isConfirm === 0 ? 1 : 0 ;
-        // return $isconfirm;
-        try {
-            $confirmation = $this->bloodRequestService->getById($id)->isConfirm === 0 ? 1 : 0 ;
-            $object = $this->bloodRequestService->update($id,['isConfirm'=> (int)$confirmation]);
-            
-            return $this->responseJson(
-                $object,
-                Response::HTTP_OK,
-                $confirmation ===  1 ? __('Blood donation request is confirma ') : __('Blood donation request is unconfirm ')
-            );
-        } catch (Exception $exception) {
-            return $this->responseErrorJson($exception);
-        }
-    }
 }

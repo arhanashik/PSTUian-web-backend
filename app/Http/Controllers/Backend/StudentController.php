@@ -25,7 +25,7 @@ class StudentController extends BaseController
     /**
      * @OA\GET(
      *     path="/api/v1/backend/students",
-     *     tags={"Students"},
+     *     tags={"Students-Backend"},
      *     summary="Get Students list as array",
      *     description="",
      *     security={{"bearer":{}}},
@@ -50,7 +50,7 @@ class StudentController extends BaseController
     /**
      * @OA\GET(
      *     path="/api/v1/backend/students/all",
-     *     tags={"Students"},
+     *     tags={"Students-Backend"},
      *     summary="Get Students list as array",
      *     description="",
      *     security={{"bearer":{}}},
@@ -78,7 +78,7 @@ class StudentController extends BaseController
     /**
      * @OA\GET(
      *     path="/api/v1/backend/students/{id}",
-     *     tags={"Students"},
+     *     tags={"Students-Backend"},
      *     summary="Get a Student",
      *     description="Get a Student",
      *     @OA\Parameter(name="id", description="id, eg; 1", required=true, in="path", @OA\Schema(type="integer")),
@@ -105,7 +105,7 @@ class StudentController extends BaseController
     /**
      * @OA\Post(
      *     path="/api/v1/backend/students",
-     *     tags={"Students"},
+     *     tags={"Students-Backend"},
      *     summary="Insert new Student",
      *     description="Implement an API endpoint for administrators to effortlessly add new Student entries.",
      *     security={{"bearerAuth":{}}},
@@ -155,7 +155,7 @@ class StudentController extends BaseController
     /**
      * @OA\PUT(
      *     path="/api/v1/backend/students/{id}",
-     *     tags={"Students"},
+     *     tags={"Students-Backend"},
      *     summary="Update Student",
      *     description="Student update api",
      *     @OA\Parameter(name="id", description="id, eg; 1", required=true, in="path", @OA\Schema(type="integer")),
@@ -207,7 +207,7 @@ class StudentController extends BaseController
     /**
      * @OA\Delete(
      *      path="/api/v1/backend/students/{id}",
-     *      tags={"Students"},
+     *      tags={"Students-Backend"},
      *      summary="Delete a student",
      *      description="Delete a student by ID",
      *      @OA\Parameter(

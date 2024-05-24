@@ -22,7 +22,7 @@ class DonationsController extends BaseController
     /**
      * @OA\GET(
      *     path="/api/v1/frontend/donations",
-     *     tags={"Frontend-Donations"},
+     *     tags={"Donations-Frontend"},
      *     summary="Get Donation List as Array",
      *     description="Get Donation List as Array",
      *     @OA\Parameter(name="deleted", description="Delete type, Not Deleted=0, Soft=1, Hard=9", example="0", required=false, in="query", @OA\Schema(type="integer")),
@@ -49,7 +49,7 @@ class DonationsController extends BaseController
     /**
      * @OA\POST(
      *     path="/api/v1/frontend/donations",
-     *     tags={"Frontend-Donations"},
+     *     tags={"Donations-Frontend"},
      *     summary="Create Donation",
      *     description="Create Donation",
      *     security={{"bearer":{}}},

@@ -23,7 +23,7 @@ class BatchController extends BaseController
     /**
      * @OA\GET(
      *     path="/api/v1/backend/batches",
-     *     tags={"Backend-Batches"},
+     *     tags={"Batches-Backend"},
      *     summary="Get Batch List as Array",
      *     description="Get Batch List as Array",
      *     @OA\Parameter(name="deleted", description="Delete type, Not Deleted=0, Soft=1, Hard=9", example="0", required=false, in="query", @OA\Schema(type="integer")),
@@ -52,7 +52,7 @@ class BatchController extends BaseController
     /**
      * @OA\GET(
      *     path="/api/v1/backend/batches/{id}",
-     *     tags={"Backend-Batches"},
+     *     tags={"Batches-Backend"},
      *     summary="Get a Batch",
      *     description="Get a Batch",
      *     @OA\Parameter(name="id", description="id, eg; 1", required=true, in="path", @OA\Schema(type="integer")),
@@ -75,7 +75,7 @@ class BatchController extends BaseController
     /**
      * @OA\POST(
      *     path="/api/v1/backend/batches",
-     *     tags={"Backend-Batches"},
+     *     tags={"Batches-Backend"},
      *     summary="Insert new batch",
      *     description="Implement an API endpoint for administrators to effortlessly add new batch entries.",
      *     security={{"bearer":{}}},
@@ -111,7 +111,7 @@ class BatchController extends BaseController
     /**
      * @OA\PUT(
      *     path="/api/v1/backend/batches/{id}",
-     *     tags={"Backend-Batches"},
+     *     tags={"Batches-Backend"},
      *     summary="Update batch",
      *     description="Update batch by ID",
      *     @OA\Parameter(name="id", description="ID of the batch", required=true, in="path", @OA\Schema(type="integer")),
@@ -149,7 +149,7 @@ class BatchController extends BaseController
     /**
      * @OA\Delete(
      *      path="/api/v1/backend/batches/{id}",
-     *      tags={"Backend-Batches"},
+     *      tags={"Batches-Backend"},
      *      summary="Delete a batch",
      *      description="Delete a batch by its ID",
      *      @OA\Parameter(

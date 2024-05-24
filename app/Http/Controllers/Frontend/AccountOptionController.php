@@ -22,7 +22,7 @@ class AccountOptionController extends BaseController
     /**
      * @OA\GET(
      *     path="/api/v1/frontend/account-options",
-     *     tags={"Frontend-AccountOptions"},
+     *     tags={"AccountOptions-Frontend"},
      *     summary="Get AccountOptions List as Array",
      *     description="Get AccountOptions List as Array",
      *     @OA\Parameter(name="deleted", description="Delete type, Not Deleted=0, Soft=1, Hard=9", example="0", required=false, in="query", @OA\Schema(type="integer")),

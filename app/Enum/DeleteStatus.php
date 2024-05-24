@@ -9,4 +9,5 @@ enum DeleteStatus: int
     case NOT_DELETED = 0;
     case SOFT_DELETE = 1;
     case HARD_DELETE = 9;
+    case PARMANENT_DELETE = 10;
 }

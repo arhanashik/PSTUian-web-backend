@@ -22,7 +22,7 @@ class FacultyController extends BaseController
     /**
      * @OA\GET(
      *     path="/api/v1/backend/faculties",
-     *     tags={"Faculties"},
+     *     tags={"Faculties-Backend"},
      *     summary="Get Faculty List as Array",
      *     description="Get Faculty List as Array",
      *     @OA\Parameter(name="deleted", description="Delete type, Not Deleted=0, Soft=1, Hard=9", example="0", required=false, in="query", @OA\Schema(type="integer")),
@@ -51,7 +51,7 @@ class FacultyController extends BaseController
     /**
      * @OA\POST(
      *     path="/api/v1/backend/faculties",
-     *     tags={"Faculties"},
+     *     tags={"Faculties-Backend"},
      *     summary="Admin insert new Faculty",
      *     description="Implement an API endpoint for administrators to effortlessly add new faculty entries.",
      *     security={{"bearer":{}}},
@@ -84,7 +84,7 @@ class FacultyController extends BaseController
     /**
      * @OA\PUT(
      *     path="/api/v1/backend/faculties/{id}",
-     *     tags={"Faculties"},
+     *     tags={"Faculties-Backend"},
      *     summary="Update faculty",
      *     description="Update faculty by ID",
      *     @OA\Parameter(name="id", description="id, eg; 1", required=true, in="path", @OA\Schema(type="integer")),
@@ -120,7 +120,7 @@ class FacultyController extends BaseController
     /**
      * @OA\GET(
      *     path="/api/v1/frontend/faculties/{id}",
-     *     tags={"Faculties"},
+     *     tags={"Faculties-Backend"},
      *     summary="Show faculty by id",
      *     description="",
      *     @OA\Parameter(name="id", description="id, eg; 1", required=true, in="path", @OA\Schema(type="integer")),

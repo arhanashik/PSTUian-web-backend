@@ -21,7 +21,7 @@ class BatchController extends BaseController
     /**
      * @OA\GET(
      *     path="/api/v1/frontend/batches",
-     *     tags={"Frontend-Batches"},
+     *     tags={"Batches-Frontend"},
      *     summary="Get Batch List as Array",
      *     description="Get Batch List as Array",
      *     @OA\Parameter(name="deleted", description="Delete type, Not Deleted=0, Soft=1, Hard=9", example="0", required=false, in="query", @OA\Schema(type="integer")),
@@ -50,7 +50,7 @@ class BatchController extends BaseController
     /**
      * @OA\GET(
      *     path="/api/v1/frontend/batches/{id}",
-     *     tags={"Frontend-Batches"},
+     *     tags={"Batches-Frontend"},
      *     summary="Get a Batch",
      *     description="Get a Batch",
      *     @OA\Parameter(name="id", description="id, eg; 1", required=true, in="path", @OA\Schema(type="integer")),

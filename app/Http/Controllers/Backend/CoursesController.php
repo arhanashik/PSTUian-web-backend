@@ -23,7 +23,7 @@ class CoursesController extends BaseController
     /**
      * @OA\GET(
      *     path="/api/v1/backend/courses",
-     *     tags={"Courses"},
+     *     tags={"Courses-Backend"},
      *     summary="Get courses list as array",
      *     @OA\Parameter(name="deleted", description="Delete type, Not Deleted=0, Soft=1, Hard=9", example="0", required=false, in="query", @OA\Schema(type="integer")),
      *     description="",
@@ -52,7 +52,7 @@ class CoursesController extends BaseController
     /**
      * @OA\POST(
      *     path="/api/v1/backend/courses",
-     *     tags={"Courses"},
+     *     tags={"Courses-Backend"},
      *     summary="Add new course",
      *     description="",
      *     security={{"bearer":{}}},
@@ -87,7 +87,7 @@ class CoursesController extends BaseController
     /**
      * @OA\PUT(
      *     path="/api/v1/backend/courses/{id}",
-     *     tags={"Courses"},
+     *     tags={"Courses-Backend"},
      *     summary="Course update api ",
      *     description="",
      *     @OA\Parameter(name="id", description="id, eg; 1", required=true, in="path", @OA\Schema(type="integer")),
@@ -124,7 +124,7 @@ class CoursesController extends BaseController
     /**
      * @OA\DELETE(
      *     path="/api/v1/backend/courses/{id}",
-     *     tags={"Courses"},
+     *     tags={"Courses-Backend"},
      *     summary="Delete a course",
      *     description="Delete a specific course by its ID",
      *     @OA\Parameter(
