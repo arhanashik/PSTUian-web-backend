@@ -49,33 +49,31 @@ class BloodDonationRequestController extends BaseController
         }
     }
 
-    public function create()
-    {
-        //
-    }
 
-    public function store(Request $request)
+    /**
+     * @OA\GET(
+     *     path="/api/v1/backend/bloodrequests/{id}",
+     *     tags={"Blood Requests Backend"},
+     *     summary="Get blood request",
+     *     description="Get blood request",
+     *     @OA\Parameter(name="id", description="id, eg; 1", required=true, in="path", @OA\Schema(type="integer")),
+     *     security={{"bearer":{}}},
+     *     @OA\Response(response=200,description="Get a blood request"),
+     *     @OA\Response(response=400, description="Bad request"),
+     *     @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
+    public function show(int $id)
     {
-        //
-    }
-
-    public function show(string $id)
-    {
-        //
-    }
-
-    public function edit(string $id)
-    {
-        //
-    }
-
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    public function destroy(string $id)
-    {
-        //
+        try {
+            $bloodRequest = $this->bloodRequestService->getById($id);
+            return $this->responseJson(
+                $bloodRequest,
+                Response::HTTP_OK,
+                __('Blood request found')
+            );
+        } catch (Exception $exception) {
+            return $this->responseErrorJson($exception);
+        }
     }
 }
