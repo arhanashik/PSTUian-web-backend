@@ -23,7 +23,7 @@ class BloodDonationRequestController extends BaseController
 
     /**
      * @OA\GET(
-     *     path="/api/v1/frontend/bloodrequests",
+     *     path="/api/v1/frontend/blood-requests",
      *     tags={"Blood-Requests-Frontend"},
      *     summary="Get blood requests list as array",
      *     @OA\Parameter(name="deleted", description="Delete type, Not Deleted=0, Soft=1, Hard=9", example="0", required=false, in="query", @OA\Schema(type="integer")),
@@ -53,7 +53,7 @@ class BloodDonationRequestController extends BaseController
 
     /**
      * @OA\GET(
-     *     path="/api/v1/frontend/bloodrequests/{id}",
+     *     path="/api/v1/frontend/blood-requests/{id}",
      *     tags={"Blood-Requests-Frontend"},
      *     summary="Get blood request",
      *     description="Get blood request",
@@ -80,7 +80,7 @@ class BloodDonationRequestController extends BaseController
 
     /**
      * @OA\POST(
-     *     path="/api/v1/frontend/bloodrequests",
+     *     path="/api/v1/frontend/blood-requests",
      *     tags={"Blood-Requests-Frontend"},
      *     summary="Add blood donation request",
      *     description="",
@@ -115,7 +115,7 @@ class BloodDonationRequestController extends BaseController
 
     /**
      * @OA\PUT(
-     *     path="/api/v1/frontend/bloodrequests/{id}",
+     *     path="/api/v1/frontend/blood-requests/{id}",
      *     tags={"Blood-Requests-Frontend"},
      *     summary="Update Blood donation request",
      *     description="Update Blood donation request api",
@@ -156,7 +156,7 @@ class BloodDonationRequestController extends BaseController
 
     /**
      * @OA\Delete(
-     *      path="/api/v1/frontend/bloodrequests/{id}",
+     *      path="/api/v1/frontend/blood-requests/{id}",
      *      tags={"Blood-Requests-Frontend"},
      *      summary="Blood donation request",
      *      description="Blood donation request by ID",
