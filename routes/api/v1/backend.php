@@ -47,4 +47,4 @@ Route::apiResource('employees', EmployeeController::class);
 Route::apiResource('academicyears', AcademicYearController::class)->only(['index', 'store', 'update', 'destroy']);
 
 // Blood donation request
-Route::apiResource('bloodrequests', BloodDonationRequestController::class)->only(['index','show', 'store', 'destroy']);
+Route::apiResource('bloodrequests', BloodDonationRequestController::class)->only(['index','show', 'store', 'update', 'destroy']);

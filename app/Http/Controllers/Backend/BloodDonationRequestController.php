@@ -112,4 +112,44 @@ class BloodDonationRequestController extends BaseController
             return $this->responseErrorJson($exception);
         }
     }
+
+    /**
+     * @OA\PUT(
+     *     path="/api/v1/backend/bloodrequests/{id}",
+     *     tags={"Blood Requests Backend"},
+     *     summary="Update Blood donation request",
+     *     description="Update Blood donation request api",
+     *     @OA\Parameter(name="id", description="id, eg; 1", required=true, in="path", @OA\Schema(type="integer")),
+     *     @OA\Parameter(name="_method", description="PUT / POST", example="PUT", required=true, in="query", @OA\Schema(type="string")),
+     *     security={{"bearerAuth":{}}},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 required={"blood_group", "need_befor", "phone", "message"},
+    *                   @OA\Property(property="blood_group", type="string", example="B+"),
+    *                   @OA\Property(property="need_before", type="date", example="2024-05-25"),
+    *                   @OA\Property(property="phone", type="number", example="01403487219"),
+    *                   @OA\Property(property="message", type="text", example="Blood need for a pragnenet patient"),
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(response=201, description="Blood donation request updated successfully"),
+     *     @OA\Response(response=400, description="Bad request"),
+     *     @OA\Response(response=404, description="Resource Not Found")
+     * )
+     */
+    public function update(RequestBloodDonationRequest $request, int $id): JsonResponse
+    {
+        try {
+            return $this->responseJson(
+                $this->bloodRequestService->update($id, $request->all()),
+                Response::HTTP_OK,
+                __('Blood donation request updated successfully.')
+            );
+        } catch (Exception $exception) {
+            return $this->responseErrorJson($exception);
+        }
+    }
 }
