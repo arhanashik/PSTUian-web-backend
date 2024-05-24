@@ -22,8 +22,8 @@ class AcademicYearController extends BaseController
 
     /**
      * @OA\GET(
-     *     path="/api/v1/backend/academicyears",
-     *     tags={"Backend-Academic-Year"},
+     *     path="/api/v1/backend/academic-years",
+     *     tags={"Academic-Year-Backend"},
      *     summary="Get Academic-Year list as array",
      *     description="Get Academic-Year list as array",
      *     @OA\Parameter(name="deleted", description="Delete type, Not Deleted=0, Soft=1, Hard=9", example="0", required=false, in="query", @OA\Schema(type="integer")),
@@ -50,8 +50,8 @@ class AcademicYearController extends BaseController
 
     /**
      * @OA\POST(
-     *     path="/api/v1/backend/academicyears",
-     *     tags={"Backend-Academic-Year"},
+     *     path="/api/v1/backend/academic-years",
+     *     tags={"Academic-Year-Backend"},
      *     summary="Add new Academic-Year",
      *     description="",
      *     security={{"bearer":{}}},
@@ -82,8 +82,8 @@ class AcademicYearController extends BaseController
 
     /**
      * @OA\PUT(
-     *     path="/api/v1/backend/academicyears/{id}",
-     *     tags={"Backend-Academic-Year"},
+     *     path="/api/v1/backend/academic-years/{id}",
+     *     tags={"Academic-Year-Backend"},
      *     summary="Update Academic-Year",
      *     description="Update Academic-Year by ID",
      *     @OA\Parameter(name="id", description="id, eg; 1", required=true, in="path", @OA\Schema(type="integer")),
@@ -116,8 +116,8 @@ class AcademicYearController extends BaseController
 
     /**
      * @OA\DELETE(
-     *     path="/api/v1/backend/academicyears/{id}",
-     *     tags={"Backend-Academic-Year"},
+     *     path="/api/v1/backend/academic-years/{id}",
+     *     tags={"Academic-Year-Backend"},
      *     summary="Delete Academic-Year",
      *     description="Delete a specific Academic-Year by its ID",
      *     @OA\Parameter(

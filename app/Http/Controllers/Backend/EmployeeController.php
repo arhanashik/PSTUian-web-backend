@@ -23,7 +23,7 @@ class EmployeeController extends BaseController
     /**
      * @OA\GET(
      *     path="/api/v1/backend/employees",
-     *     tags={"Backend-employees"},
+     *     tags={"Employees-Backend"},
      *     summary="Get Employee List as Array",
      *     description="Get Employee List as Array",
      *     @OA\Parameter(name="deleted", description="Delete type, Not Deleted=0, Soft=1, Hard=9", example="0", required=false, in="query", @OA\Schema(type="integer")),
@@ -52,7 +52,7 @@ class EmployeeController extends BaseController
     /**
      * @OA\GET(
      *     path="/api/v1/backend/employees/{id}",
-     *     tags={"Backend-employees"},
+     *     tags={"Employees-Backend"},
      *     summary="Get a Employee",
      *     description="Get a Employee",
      *     @OA\Parameter(name="id", description="id, eg; 1", required=true, in="path", @OA\Schema(type="integer")),
@@ -79,7 +79,7 @@ class EmployeeController extends BaseController
     /**
      * @OA\POST(
      *     path="/api/v1/backend/employees",
-     *     tags={"Backend-employees"},
+     *     tags={"Employees-Backend"},
      *     summary="Insert new employee",
      *     description="Implement an API endpoint for administrators to effortlessly add new employee entries.",
      *     security={{"bearer":{}}},
@@ -117,7 +117,7 @@ class EmployeeController extends BaseController
     /**
      * @OA\PUT(
      *     path="/api/v1/backend/employees/{id}",
-     *     tags={"Backend-employees"},
+     *     tags={"Employees-Backend"},
      *     summary="Update employee",
      *     description="Update employee by ID",
      *     @OA\Parameter(name="id", description="id, eg; 1", required=true, in="path", @OA\Schema(type="integer")),
@@ -157,7 +157,7 @@ class EmployeeController extends BaseController
     /**
      * @OA\Delete(
      *      path="/api/v1/backend/employees/{id}",
-     *      tags={"Backend-employees"},
+     *      tags={"Employees-Backend"},
      *      summary="Delete a employee",
      *      description="Delete a employee by its ID",
      *      @OA\Parameter(

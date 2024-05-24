@@ -32,6 +32,10 @@ class DeleteMessage
 
             case DeleteStatus::NOT_DELETED->value:
                 return sprintf('%s has been restored', $this->entityName);
+            
+            case DeleteStatus::PARMANENT_DELETE->value:
+                return sprintf('%s has been parmanently deleted', $this->entityName);
+
             default:
                 return sprintf('No delete action happened for '.$this->deletedStatus);
         }

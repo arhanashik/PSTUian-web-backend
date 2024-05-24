@@ -21,7 +21,7 @@ class EmployeeController extends BaseController
     /**
      * @OA\GET(
      *     path="/api/v1/frontend/employees",
-     *     tags={"Frontend-employees"},
+     *     tags={"Employees-Frontend"},
      *     summary="Get Employee List as Array",
      *     description="Get Employee List as Array",
      *     @OA\Parameter(name="deleted", description="Delete type, Not Deleted=0, Soft=1, Hard=9", example="0", required=false, in="query", @OA\Schema(type="integer")),
@@ -50,7 +50,7 @@ class EmployeeController extends BaseController
     /**
      * @OA\GET(
      *     path="/api/v1/frontend/employees/{id}",
-     *     tags={"Frontend-employees"},
+     *     tags={"Employees-Frontend"},
      *     summary="Get a Employee",
      *     description="Get a Employee",
      *     @OA\Parameter(name="id", description="id, eg; 1", required=true, in="path", @OA\Schema(type="integer")),

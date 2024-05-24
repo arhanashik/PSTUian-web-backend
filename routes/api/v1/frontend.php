@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Backend\FacultyController;
 use App\Http\Controllers\Frontend\AccountOptionController;
+use App\Http\Controllers\Frontend\BloodDonationController;
+use App\Http\Controllers\Frontend\BloodDonationRequestController;
 use App\Http\Controllers\Frontend\DonationsController;
 use App\Http\Controllers\Frontend\PingPongController;
 use App\Http\Controllers\Frontend\BatchController;
@@ -27,3 +29,11 @@ Route::apiResource('employees', EmployeeController::class)->only(['index', 'show
 
 // Faculty
 Route::apiResource('faculties', FacultyController::class)->only(['index', 'show']);
+
+
+// Blood donation request
+Route::apiResource('blood-requests', BloodDonationRequestController::class)->only(['index','show', 'store', 'update', 'destroy']);
+
+
+// Blood donation
+Route::apiResource('blood-donations', BloodDonationController::class)->only(['index', 'show', 'store', 'update', 'destroy']);

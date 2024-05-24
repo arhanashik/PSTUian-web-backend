@@ -22,7 +22,7 @@ class AccountOptionController extends BaseController
     /**
      * @OA\GET(
      *     path="/api/v1/backend/account-options",
-     *     tags={"Backend-AccountOptions"},
+     *     tags={"AccountOptions-Backend"},
      *     summary="Get AccountOptions List as Array",
      *     description="Get AccountOptions List as Array",
      *     @OA\Parameter(name="deleted", description="Delete type, Not Deleted=0, Soft=1, Hard=9", example="0", required=false, in="query", @OA\Schema(type="integer")),
@@ -48,7 +48,7 @@ class AccountOptionController extends BaseController
     /**
      * @OA\POST(
      *     path="/api/v1/backend/account-options",
-     *     tags={"Backend-AccountOptions"},
+     *     tags={"AccountOptions-Backend"},
      *     summary="Create Account-Option",
      *     description="You can send a donation to the following accounts.",
      *     security={{"bearer":{}}},

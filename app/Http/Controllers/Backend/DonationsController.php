@@ -22,7 +22,7 @@ class DonationsController extends BaseController
     /**
      * @OA\GET(
      *     path="/api/v1/backend/donations",
-     *     tags={"Backend-Donations"},
+     *     tags={"Donations-Backend"},
      *     summary="Get Donation List as Array",
      *     @OA\Parameter(name="deleted", description="Delete type, Not Deleted=0, Soft=1, Hard=9", example="0", required=false, in="query", @OA\Schema(type="integer")),
      *     description="Get Donation List as Array",
@@ -51,7 +51,7 @@ class DonationsController extends BaseController
     /**
      * @OA\PUT(
      *      path="/api/v1/backend/donations/confirm/{id}",
-     *      tags={"Backend-Donations"},
+     *      tags={"Donations-Backend"},
      *      summary="Confirm Donation",
      *      description="Confirm Donation by its ID",
      *      @OA\Parameter(
@@ -103,7 +103,7 @@ class DonationsController extends BaseController
     /**
      * @OA\PUT(
      *      path="/api/v1/backend/donations/unconfirm/{id}",
-     *      tags={"Backend-Donations"},
+     *      tags={"Donations-Backend"},
      *      summary="Unconfirm Donation",
      *      description="Unconfirm Donation by its ID",
      *      @OA\Parameter(
@@ -154,7 +154,7 @@ class DonationsController extends BaseController
     /**
      * @OA\Delete(
      *      path="/api/v1/backend/donations/{id}",
-     *      tags={"Backend-Donations"},
+     *      tags={"Donations-Backend"},
      *      summary="Delete a donation",
      *      description="Delete a donation by its ID",
      *      @OA\Parameter(
