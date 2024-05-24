@@ -11,7 +11,7 @@ return new class extends Migration
     {
         Schema::create('blood_donations', function (Blueprint $table) {
             $table->increments('id');
-            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id');
             $table->string('user_type', 50);
             $table->foreignId('request_id')->references('id')->on('blood_donation_requsets');
             $table->dateTime('date')->default(now());

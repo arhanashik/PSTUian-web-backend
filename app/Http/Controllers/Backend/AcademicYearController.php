@@ -22,7 +22,7 @@ class AcademicYearController extends BaseController
 
     /**
      * @OA\GET(
-     *     path="/api/v1/backend/academicyears",
+     *     path="/api/v1/backend/academic-years",
      *     tags={"Academic-Year-Backend"},
      *     summary="Get Academic-Year list as array",
      *     description="Get Academic-Year list as array",
@@ -50,7 +50,7 @@ class AcademicYearController extends BaseController
 
     /**
      * @OA\POST(
-     *     path="/api/v1/backend/academicyears",
+     *     path="/api/v1/backend/academic-years",
      *     tags={"Academic-Year-Backend"},
      *     summary="Add new Academic-Year",
      *     description="",
@@ -82,7 +82,7 @@ class AcademicYearController extends BaseController
 
     /**
      * @OA\PUT(
-     *     path="/api/v1/backend/academicyears/{id}",
+     *     path="/api/v1/backend/academic-years/{id}",
      *     tags={"Academic-Year-Backend"},
      *     summary="Update Academic-Year",
      *     description="Update Academic-Year by ID",
@@ -116,7 +116,7 @@ class AcademicYearController extends BaseController
 
     /**
      * @OA\DELETE(
-     *     path="/api/v1/backend/academicyears/{id}",
+     *     path="/api/v1/backend/academic-years/{id}",
      *     tags={"Academic-Year-Backend"},
      *     summary="Delete Academic-Year",
      *     description="Delete a specific Academic-Year by its ID",

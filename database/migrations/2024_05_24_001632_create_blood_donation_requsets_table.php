@@ -14,7 +14,7 @@ return new class extends Migration
             $table->id();
             $table->string('blood_group', 10);
             $table->date('need_before');
-            $table->tinyInteger('isConfirm')->default(0);
+            $table->boolean('isConfirm')->default(false);
             $table->string('phone');
             $table->text('message');
             $table->unsignedTinyInteger('deleted')->default(DeleteStatus::NOT_DELETED);

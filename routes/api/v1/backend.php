@@ -45,12 +45,12 @@ Route::apiResource('teachers', TeacherController::class)->only(['index', 'store'
 Route::apiResource('employees', EmployeeController::class);
 
 // AcademicYear
-Route::apiResource('academicyears', AcademicYearController::class)->only(['index', 'store', 'update', 'destroy']);
+Route::apiResource('academic-years', AcademicYearController::class)->only(['index', 'store', 'update', 'destroy']);
 
 // Blood donation request
-Route::apiResource('bloodrequests', BloodDonationRequestController::class)->only(['index','show', 'store', 'update', 'destroy']);
-Route::GET('bloodrequests/confirm/{id}', [BloodDonationRequestController::class, 'ChangeConfirmation']);
+Route::apiResource('blood-requests', BloodDonationRequestController::class)->only(['index', 'show', 'store', 'update', 'destroy']);
+Route::GET('blood-requests/confirm/{id}', [BloodDonationRequestController::class, 'ChangeConfirmation']);
 
 // Blood donation
-Route::apiResource('blooddonations', BloodDonationController::class)->only(['index','show', 'store','destroy']);
+Route::apiResource('blood-donations', BloodDonationController::class)->only(['index', 'show', 'store', 'update', 'destroy']);
 
