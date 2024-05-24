@@ -3,13 +3,13 @@
 use App\Http\Controllers\Backend\AcademicYearController;
 use App\Http\Controllers\Backend\AccountOptionController;
 use App\Http\Controllers\Backend\BatchController;
+use App\Http\Controllers\Backend\BloodDonationRequestController;
 use App\Http\Controllers\Backend\CoursesController;
 use App\Http\Controllers\Backend\DonationsController;
 use App\Http\Controllers\Backend\EmployeeController;
 use App\Http\Controllers\Backend\FacultyController;
 use App\Http\Controllers\Backend\StudentController;
 use App\Http\Controllers\Backend\TeacherController;
-use App\Http\Controllers\BloodDonationRequestController;
 use Illuminate\Support\Facades\Route;
 
 // Donations
@@ -47,4 +47,4 @@ Route::apiResource('employees', EmployeeController::class);
 Route::apiResource('academicyears', AcademicYearController::class)->only(['index', 'store', 'update', 'destroy']);
 
 // Blood donation request
-Route::apiResource('boodrequests', BloodDonationRequestController::class)->only(['index', 'store', 'destroy']);
+Route::apiResource('bloodrequests', BloodDonationRequestController::class)->only(['index', 'store', 'destroy']);
